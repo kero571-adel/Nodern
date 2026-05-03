@@ -1,10 +1,11 @@
 {
-    "nav": {
-      "services": "Services",
-      "work": "Work",
-      "about": "About",
-      "contact": "Contact",
-      "cta": "Start Your Project",
-      "Hello": "Hello world"
-    }
+  "nav": {
+    "services": "Services",
+    "work": "Work",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Hello"
   }
+}
