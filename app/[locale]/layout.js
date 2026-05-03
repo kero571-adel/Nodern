@@ -1,6 +1,8 @@
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "../../i18n/routing";
+import Navbar from "../../components/layout/Navbar";
+import Footer from "../../components/layout/footer";
 import "../globals.css";
 import { Cairo } from "next/font/google";
 const cairo = Cairo({
@@ -24,7 +26,9 @@ export default async function RootLayout({ children, params }) {
     >
       <body className={`${cairo.className} `}>
         <NextIntlClientProvider messages={messages}>
+          <Navbar />
           {children}
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>
