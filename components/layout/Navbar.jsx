@@ -1,8 +1,14 @@
+"use client"
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "../LanguageSwitcher";
 import Link from "next/link";
+import NavMobile from "./NavMobile";
+import { useState } from "react";
+import { IoMenu } from "react-icons/io5";
 export default function Navbar() {
   const t = useTranslations("nav");
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   return (
     <nav>
       {/* container */}
@@ -19,7 +25,7 @@ export default function Navbar() {
           <div>
             <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#services"}>{t("services")}</Link>
             <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#work"}>{t("work")}</Link>
-            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#about"}>{t("about")}</Link>
+            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#whyChooseUs"}>{t("whyChooseUs")}</Link>
             <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#contact"}>{t("contact")}</Link>
           </div>
 
@@ -37,16 +43,9 @@ export default function Navbar() {
 
         {/* menu icon */}
         <div className="md:hidden hover:scale-105 transition-all cursor-pointer opacity-75 hover:opacity-100">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+          <IoMenu size={30} className="opacity-75 hover:opacity-100 hover:scale-105 duration-200 transition-all" onClick={() => setIsNavOpen(!isNavOpen)} />
         </div>
+          <NavMobile isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
       </div>
     </nav>
   );
