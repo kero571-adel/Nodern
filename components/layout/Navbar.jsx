@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "../LanguageSwitcher";
 import Link from "next/link";
@@ -23,29 +23,55 @@ export default function Navbar() {
         <div className="hidden md:flex items-center flex-2 justify-between">
           {/* links */}
           <div>
-            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#services"}>{t("services")}</Link>
-            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#work"}>{t("work")}</Link>
-            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#whyChooseUs"}>{t("whyChooseUs")}</Link>
-            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#contact"}>{t("contact")}</Link>
+            <Link
+              className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+              href={"#services"}
+            >
+              {t("services")}
+            </Link>
+            <Link
+              className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+              href={"#work"}
+            >
+              {t("work")}
+            </Link>
+            <Link
+              className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+              href={"#whyChooseUs"}
+            >
+              {t("whyChooseUs")}
+            </Link>
+            <Link
+              className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+              href={"#contact"}
+            >
+              {t("contact")}
+            </Link>
           </div>
 
-          {/* start new project btn */}
-          <Link
-            href={"#contact"}
-            className="bg-white text-gray-800 font-bold border-blue-800 hover:scale-105   rounded-full px-4 py-2 hover:bg-gray-200 transition-all"
-          >
-            {t("startProject")}
-          </Link>
+          <div className="flex items-center gap-4 w-1/2 ">
+            {/* start new project btn */}
+            <Link
+              href={"#contact"}
+              className="bg-white text-gray-800 text-center font-bold border-blue-800 hover:scale-105   rounded-full px-4 py-2 hover:bg-gray-200 w-full transition-all"
+            >
+              {t("startProject")}
+            </Link>
 
-          {/* Language Switcher */}
-          <LanguageSwitcher />
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+          </div>
         </div>
 
         {/* menu icon */}
         <div className="md:hidden hover:scale-105 transition-all cursor-pointer opacity-75 hover:opacity-100">
-          <IoMenu size={30} className="opacity-75 hover:opacity-100 hover:scale-105 duration-200 transition-all" onClick={() => setIsNavOpen(!isNavOpen)} />
+          <IoMenu
+            size={30}
+            className="opacity-75 hover:opacity-100 hover:scale-105 duration-200 transition-all"
+            onClick={() => setIsNavOpen(!isNavOpen)}
+          />
         </div>
-          <NavMobile isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
+        <NavMobile isOpen={isNavOpen} setIsOpen={setIsNavOpen} />
       </div>
     </nav>
   );
