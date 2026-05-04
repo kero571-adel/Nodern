@@ -51,11 +51,11 @@ export default function Navbar() {
             </Link>
           </div>
 
-          <div className="flex items-center justify-center gap-7 w-1/2">
+          <div className="flex items-center justify-end gap-7 w-1/2">
             {/* start new project btn */}
             <Link
               href={"#contact"}
-              className="bg-white w-full text-center text-gray-800 font-bold border-blue-800 hover:scale-105 rounded-full px-10 py-2 hover:bg-gray-200 transition-all"
+              className="bg-white text-center w-fit text-gray-800 font-bold border-blue-800 hover:scale-105 rounded-full px-5 py-2 hover:bg-gray-200 transition-all"
             >
               {t("startProject")}
             </Link>
