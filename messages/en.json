@@ -3,7 +3,8 @@
     "services": "Services",
     "work": "Work",
     "about": "About",
-    "contact": "Contact"
+    "contact": "Contact",
+    "startProject": "Start a project"
   },
   "hero": {
     "title": "Hello",
