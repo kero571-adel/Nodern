@@ -1,8 +1,16 @@
+"use client";
+
 import { useTranslations } from "next-intl";
 import LanguageSwitcher from "../LanguageSwitcher";
 import Link from "next/link";
+import { useState } from "react";
+
+import NavMobile from "./NavMobile";
+import { IoMdMenu } from "react-icons/io";
+
 export default function Navbar() {
   const t = useTranslations("nav");
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <nav>
       {/* container */}
@@ -17,35 +25,53 @@ export default function Navbar() {
         <div className="hidden md:flex items-center flex-2 justify-between">
           {/* links */}
           <div>
-            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#services"}>{t("services")}</Link>
-            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#work"}>{t("work")}</Link>
-            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#about"}>{t("about")}</Link>
-            <Link className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 " href={"#contact"}>{t("contact")}</Link>
+            <Link
+              className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+              href={"#services"}
+            >
+              {t("services")}
+            </Link>
+            <Link
+              className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+              href={"#work"}
+            >
+              {t("work")}
+            </Link>
+            <Link
+              className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+              href={"#about"}
+            >
+              {t("whyChooseUs")}
+            </Link>
+            <Link
+              className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+              href={"#contact"}
+            >
+              {t("contact")}
+            </Link>
           </div>
 
-          {/* start new project btn */}
-          <Link
-            href={"#contact"}
-            className="bg-white text-gray-800 font-bold border-blue-800 hover:scale-105   rounded-full px-4 py-2 hover:bg-gray-200 transition-all"
-          >
-            {t("startProject")}
-          </Link>
+          <div className="flex items-center justify-center gap-7 w-1/2">
+            {/* start new project btn */}
+            <Link
+              href={"#contact"}
+              className="bg-white w-full text-center text-gray-800 font-bold border-blue-800 hover:scale-105 rounded-full px-10 py-2 hover:bg-gray-200 transition-all"
+            >
+              {t("startProject")}
+            </Link>
 
-          {/* Language Switcher */}
-          <LanguageSwitcher />
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+          </div>
         </div>
 
-        {/* menu icon */}
-        <div className="md:hidden hover:scale-105 transition-all cursor-pointer opacity-75 hover:opacity-100">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
+        {/* icons for open menu */}
+        <div className="md:hidden">
+          <IoMdMenu size={30} className="opacity-75 transition-all duration-200 cursor-pointer hover:scale-105 hover:opacity-100 " onClick={() => setIsOpen(true)} />
+        </div>
+        {/* show nav for mobile  */}
+        <div className="md:hidden">
+          <NavMobile isOpen={isOpen} setIsOpen={setIsOpen} />
         </div>
       </div>
     </nav>
