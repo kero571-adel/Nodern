@@ -9,5 +9,16 @@
   "hero": {
     "title": "Hello",
     "description": "We are a digital agency that specializes in creating beautiful and functional websites."
-  }
+  },
+  "footer": {
+    "quickLinks": "Quick Links",
+    "connect": "Connect",
+    "messageForClient": "A futuristic web development agency building high-performance digital experiences for ambitious businesses.",
+    "services": "Services",
+    "work": "Work",
+    "whyChooseUs": "Why Choose Us",
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
+  } 
 }
