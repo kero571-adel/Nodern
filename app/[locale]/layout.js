@@ -24,11 +24,13 @@ export default async function RootLayout({ children, params }) {
       dir={locale === "ar" ? "rtl" : "ltr"}
       className={cairo.variable}
     >
-      <body className={`${cairo.className} `}>
+      <body className={`${cairo.className} flex flex-col min-h-screen`}>
         <NextIntlClientProvider messages={messages}>
           <Navbar />
           {children}
-          <Footer />
+          <footer className="mt-auto w-full">
+            <Footer />
+          </footer>
         </NextIntlClientProvider>
       </body>
     </html>

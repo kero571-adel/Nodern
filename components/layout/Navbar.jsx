@@ -67,7 +67,11 @@ export default function Navbar() {
 
         {/* icons for open menu */}
         <div className="md:hidden">
-          <IoMdMenu size={30} className="opacity-75 transition-all duration-200 cursor-pointer hover:scale-105 hover:opacity-100 " onClick={() => setIsOpen(true)} />
+          <IoMdMenu
+            size={30}
+            className="opacity-75 transition-all duration-200 cursor-pointer hover:scale-105 hover:opacity-100 "
+            onClick={() => setIsOpen(true)}
+          />
         </div>
         {/* show nav for mobile  */}
         <div className="md:hidden">
