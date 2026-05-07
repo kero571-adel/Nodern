@@ -13,17 +13,18 @@ export default function NavMobile({ isOpen, setIsOpen }) {
    {isOpen && <div onClick={() => setIsOpen(false)} className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm z-40" />}
       {/* navigation for mobile */}
       <div
-        className={`md:hidden flex flex-col bg-black/40 backdrop-blur-2xl h-screen fixed top-0 right-0 w-1/2 z-50 p-8 ${isOpen ? "translate-x-0" : "translate-x-full"} transition-all duration-300 ease-in-out`}
+        className={`md:hidden flex flex-col bg-black/40 backdrop-blur-2xl h-screen fixed top-0 right-0 z-50 py-6 px-4 ${isOpen ? "translate-x-0" : "translate-x-full"} transition-all duration-300 ease-in-out`}
       >
         <div className="flex justify-between items-center w-full mb-10">
           {/* logo */}
-          <Link href="/" className="text-3xl font-bold flex-1">
+          <Link onClick={() => setIsOpen(false)} href="/" className="text-xl font-bold flex-1">
             Nordern <span className="font-bold text-purple-700">.</span>
           </Link>
-          {/* menu icon */}
+
+          {/* <!-- close icon --> */}
           <IoMdClose
-          onClick={() => setIsOpen(false)}
-            size={30}
+            onClick={() => setIsOpen(false)}
+            size={20}
             className="hover:scale-105 hover:text-blue-800 duration-150 transition-all cursor-pointer"
           />
         </div>
@@ -31,28 +32,28 @@ export default function NavMobile({ isOpen, setIsOpen }) {
         <div className="flex flex-col gap-5 mb-10">
           <Link
           onClick={() => setIsOpen(false)}
-            className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+            className="mx-4 text-sm opacity-75 hover:opacity-100 transition-all duration-150 "
             href={"#services"}
           >
             {t("services")}
           </Link>
           <Link
           onClick={() => setIsOpen(false)}
-            className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+            className="mx-4 text-sm opacity-75 hover:opacity-100 transition-all duration-150 "
             href={"#work"}
           >
             {t("work")}
           </Link>
           <Link
           onClick={() => setIsOpen(false)}
-            className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+            className="mx-4 text-sm opacity-75 hover:opacity-100 transition-all duration-150 "
             href={"#about"}
           >
             {t("whyChooseUs")}
           </Link>
           <Link
           onClick={() => setIsOpen(false)}
-            className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
+            className="mx-4 text-sm opacity-75 hover:opacity-100 transition-all duration-150 "
             href={"#contact"}
           >
             {t("contact")}
@@ -63,7 +64,7 @@ export default function NavMobile({ isOpen, setIsOpen }) {
           <Link
           onClick={() => setIsOpen(false)}
             href={"#contact"}
-            className="bg-white w-full text-center text-gray-800 font-bold border-blue-800 hover:scale-105 rounded-full px-10 py-2 hover:bg-gray-200 transition-all"
+            className="bg-white text-sm w-fit text-center text-gray-800 font-bold border-blue-800 hover:scale-105 rounded-full px-10 py-2 hover:bg-gray-200 transition-all"
           >
             {t("startProject")}
           </Link>
