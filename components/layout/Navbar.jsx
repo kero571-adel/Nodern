@@ -18,7 +18,7 @@ export default function Navbar() {
         {/* logo */}
 
         <Link href="/" className="text-3xl font-bold flex-1">
-          Nordern <span className="font-bold text-purple-700">.</span>
+          Nodern <span className="font-bold text-purple-700">.</span>
         </Link>
 
         {/* Nav Links */}

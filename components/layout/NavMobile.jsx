@@ -9,6 +9,8 @@ export default function NavMobile({ isOpen, setIsOpen }) {
 
   return (
     <>
+    {/* container full the screen */}
+   {isOpen && <div onClick={() => setIsOpen(false)} className="fixed top-0 left-0 w-full h-full bg-black/30 backdrop-blur-sm z-40" />}
       {/* navigation for mobile */}
       <div
         className={`md:hidden flex flex-col bg-black/40 backdrop-blur-2xl h-screen fixed top-0 right-0 w-1/2 z-50 p-8 ${isOpen ? "translate-x-0" : "translate-x-full"} transition-all duration-300 ease-in-out`}
@@ -28,24 +30,28 @@ export default function NavMobile({ isOpen, setIsOpen }) {
 
         <div className="flex flex-col gap-5 mb-10">
           <Link
+          onClick={() => setIsOpen(false)}
             className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
             href={"#services"}
           >
             {t("services")}
           </Link>
           <Link
+          onClick={() => setIsOpen(false)}
             className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
             href={"#work"}
           >
             {t("work")}
           </Link>
           <Link
+          onClick={() => setIsOpen(false)}
             className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
             href={"#about"}
           >
             {t("whyChooseUs")}
           </Link>
           <Link
+          onClick={() => setIsOpen(false)}
             className="mx-4 opacity-75 hover:opacity-100 transition-all duration-150 "
             href={"#contact"}
           >
@@ -55,6 +61,7 @@ export default function NavMobile({ isOpen, setIsOpen }) {
         <div className="flex items-center flex-col justify-center gap-7 w-full">
           {/* start new project btn */}
           <Link
+          onClick={() => setIsOpen(false)}
             href={"#contact"}
             className="bg-white w-full text-center text-gray-800 font-bold border-blue-800 hover:scale-105 rounded-full px-10 py-2 hover:bg-gray-200 transition-all"
           >
