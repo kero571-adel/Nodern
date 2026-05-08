@@ -1,121 +1,96 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function FeedBack() {
   const locale = useLocale();
+  const t = useTranslations("feedback");
 
- 
-  const dataEn = [
-    {
-      text: "Modern completely transformed our online presence. Our conversion rate increased by 140% within the first month of launching the new site.",
-      name: "Sarah Jenkins",
-      role: "CMO, TechFlow Solutions",
-    },
-    {
-      text: "The team at Modern delivered exceptional work. Our brand visibility improved dramatically across all markets.",
-      name: "James Carter",
-      role: "CEO, Apex Innovations",
-    },
-    {
-      text: "Working with Modern was a game changer. They understood our vision and brought it to life perfectly.",
-      name: "Elena Rodriguez",
-      role: "Marketing Director, Velora Beauty",
-    },
-  ];
-
-  // البيانات بالعربي - نفس العدد، أسماء ووظائف بالعربي
-  const dataAr = [
-    {
-      text: "مودرن غيرت وجودنا على الإنترنت بالكامل. زاد معدل التحويل لدينا بنسبة 140٪ خلال الشهر الأول من إطلاق الموقع الجديد.",
-      name: "سارة جنكينز",
-      role: "مديرة التسويق، تك فلو سوليوشنز",
-    },
-    {
-      text: "فريق مودرن قدم عملاً استثنائياً. تحسنت رؤية علامتنا التجارية بشكل كبير في جميع الأسواق.",
-      name: "جيمس كارتر",
-      role: "الرئيس التنفيذي، أبيكس إنوفيشنز",
-    },
-    {
-      text: "العمل مع مودرن كان نقطة تحول. فهموا رؤيتنا وقدموها إلى الحياة بشكل مثالي.",
-      name: "إلينا رودريغيز",
-      role: "مديرة التسويق، فيلورا بيوتي",
-    },
+  const quotes = [
+    { text: t("quote1"), name: locale === "ar" ? "عميل سعيد" : "Happy Client" },
+    { text: t("quote2"), name: locale === "ar" ? "شريك نجاح" : "Success Partner" },
+    { text: t("quote3"), name: locale === "ar" ? "رائد أعمال" : "Entrepreneur" },
   ];
 
   const [index, setIndex] = useState(0);
 
-  const data = locale === "ar" ? dataAr : dataEn;
-  const currentItem = data[index];
-
-  const prev = () => {
-    setIndex(index === 0 ? data.length - 1 : index - 1);
-  };
-
-  const next = () => {
-    setIndex(index === data.length - 1 ? 0 : index + 1);
-  };
+  const prev = () => setIndex((i) => (i === 0 ? quotes.length - 1 : i - 1));
+  const next = () => setIndex((i) => (i === quotes.length - 1 ? 0 : i + 1));
 
   useEffect(() => {
-    setIndex(0);
-  }, [locale]);
+    const interval = setInterval(next, 5000);
+    return () => clearInterval(interval);
+  }, [index]);
 
   return (
-    <section className="w-full h-screen flex items-center justify-center bg-black text-white relative overflow-hidden">
+    <section className="w-full min-h-[80vh] flex items-center justify-center bg-black text-white relative overflow-hidden py-24">
+      {/* Background decoration */}
+      <div className="absolute w-[800px] h-[800px] bg-blue-600/10 blur-[160px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-      {/* gradient blur - زي الصورة بالضبط */}
-      <div className="absolute w-[900px] h-[900px] bg-purple-700 opacity-20 blur-[150px] rounded-full"></div>
+      <div className="relative z-10 text-center max-w-4xl px-6 mx-auto">
+        <motion.span 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="text-blue-500 font-bold tracking-widest uppercase text-sm mb-4 block"
+        >
+          {t("title")}
+        </motion.span>
+        
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="text-3xl md:text-5xl font-bold mb-16 text-gray-400"
+        >
+          {t("subtitle")}
+        </motion.h2>
 
-      <div className="relative z-10 text-center max-w-3xl px-6">
-        {/* title */}
-        <h2 className="text-6xl md:text-6xl font-semibold mb-12">
-          {locale === "ar" ? "آراء العملاء" : "Client Stories"}
-        </h2>
-
-        {/* quote icon */}
-        <div className="text-7xl text-purple-500 mb-6">
-          {locale === "ar" ? "❝" : "”"}
+        <div className="relative min-h-[300px] flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 1.05, y: -20 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className="absolute inset-0 flex flex-col items-center justify-center"
+            >
+              <span className="text-8xl text-blue-600/20 absolute -top-10 font-serif">“</span>
+              <p className="text-2xl md:text-4xl leading-relaxed font-medium mb-8">
+                {quotes[index].text}
+              </p>
+              <div className="w-12 h-1 bg-blue-600 mb-6 rounded-full" />
+              <h4 className="text-xl font-bold text-gray-300">{quotes[index].name}</h4>
+            </motion.div>
+          </AnimatePresence>
         </div>
 
-        {/* text */}
-        <p className="text-lg md:text-2xl leading-relaxed text-gray-200 mb-8">
-          {currentItem.text}
-        </p>
-
-        {/* name */}
-        <h4 className="text-lg font-semibold">{currentItem.name}</h4>
-
-        {/* role */}
-        <p className="text-gray-400 text-sm mb-10">{currentItem.role}</p>
-
-        {/* controls */}
-        <div className="flex items-center justify-center gap-6">
-          {/* left button */}
+        {/* Controls */}
+        <div className="flex items-center justify-center gap-8 mt-12">
           <button
             onClick={prev}
-            className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-gray-800 transition"
+            className="p-4 rounded-full border border-white/10 hover:bg-white/5 transition-all active:scale-90"
           >
-             {locale === "ar" ? "‹" : "›"}
+            <span className="text-2xl rtl:rotate-180">←</span>
           </button>
 
-          {/* dots */}
-          <div className="flex gap-2">
-            {data.map((_, i) => (
-              <div
+          <div className="flex gap-3">
+            {quotes.map((_, i) => (
+              <button
                 key={i}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  i === index ? "w-6 bg-purple-500" : "w-2 bg-gray-600"
+                onClick={() => setIndex(i)}
+                className={`h-1.5 rounded-full transition-all duration-500 ${
+                  i === index ? "w-8 bg-blue-600" : "w-2 bg-white/20"
                 }`}
               />
             ))}
           </div>
 
-          {/* right button */}
           <button
             onClick={next}
-            className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-gray-800 transition"
+            className="p-4 rounded-full border border-white/10 hover:bg-white/5 transition-all active:scale-90"
           >
-            {locale === "ar" ? "‹" : "›"}
+            <span className="text-2xl rtl:rotate-180">→</span>
           </button>
         </div>
       </div>
