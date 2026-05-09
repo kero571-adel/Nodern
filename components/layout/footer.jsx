@@ -1,8 +1,10 @@
+"use client";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import { FaFacebookF, FaTiktok } from "react-icons/fa";
 import { IoLogoInstagram } from "react-icons/io";
-import { LuGithub } from "react-icons/lu";
+import { HiOutlineEnvelope } from "react-icons/hi2";
+
 export default function Footer() {
   const t = useTranslations("footer");
   return (
@@ -56,31 +58,31 @@ export default function Footer() {
             <div className="flex items-center gap-5 justify-center">
               <Link
                 className="rounded-full border-gray-600 border-2 p-3 bg-gray-900/60 hover:bg-gray-900"
-                href={"#"}
+                href="https://www.instagram.com/nodernweb?igsh=MTh6Ym50MHNpbWIwdA=="
                 target="_blank"
               >
                 <IoLogoInstagram size={24} />
               </Link>
               <Link
                 className="rounded-full border-gray-600 border-2 p-3 bg-gray-900/60 hover:bg-gray-900"
-                href={"#"}
+                href="https://www.tiktok.com/@nodernweb?_r=1&_t=ZS-95bLRDMbD08"
                 target="_blank"
               >
-                <LuGithub size={24} />
+                <FaTiktok size={24} />
               </Link>
               <Link
                 className="rounded-full border-gray-600 border-2 p-3 bg-gray-900/60 hover:bg-gray-900"
-                href={"#"}
+                href="mailto:nodernweb@gmail.com"
+                target="_blank"
+              >
+                <HiOutlineEnvelope size={24} />
+              </Link>
+              <Link
+                className="rounded-full border-gray-600 border-2 p-3 bg-gray-900/60 hover:bg-gray-900"
+                href="https://www.facebook.com/share/1Be5EuADcb/"
                 target="_blank"
               >
                 <FaFacebookF size={24} />
-              </Link>
-              <Link
-                className="rounded-full border-gray-600 border-2 p-3 bg-gray-900/60 hover:bg-gray-900"
-                href={"#"}
-                target="_blank"
-              >
-                <FaLinkedinIn size={24} />
               </Link>
             </div>
           </div>

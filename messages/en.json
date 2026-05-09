@@ -6,23 +6,29 @@
     "contact": "Contact",
     "startProject": "Start a project"
   },
+
   "hero": {
     "title": "Hello",
-    "description": "We are a digital agency that specializes in creating beautiful and functional websites."
+    "description": "We are a digital agency that specializes in creating beautiful and functional websites.",
+    "line1": "If you made it here… you're in the right place",
+    "line2": "To build your business website the right way",
+    "line3": "Not just something that looks good… but something that helps people understand you, trust you, and contact you",
+    "scrollText": "⬇ Scroll down and see how we do it"
   },
-  "footer": {
-    "quickLinks": "Quick Links",
-    "connect": "Connect",
-    "messageForClient": "A futuristic web development agency building high-performance digital experiences for ambitious businesses.",
-    "services": "Services",
-    "work": "Work",
-    "whyChooseUs": "Why Choose Us",
-    "contact": "Contact",
-    "privacyPolicy": "Privacy Policy",
-    "termsOfService": "Terms of Service"
-  },
+
   "whyChooseUs": {
-    "title": "Why Choose Us ?",
+    "title": "Why Choose Us?",
+    "line1": "Because we don’t just build websites…",
+    "line2": "we build tools that bring you clients",
+
+    "item1": "We understand your business before writing a single line of code ✔",
+    "item2": "We analyze competitors to make you stand out ✔",
+    "item3": "We design for conversion, not just visuals ✔",
+    "item4": "Fast, smooth experience that keeps users engaged ✔",
+
+    "impression": "90% of decisions start from the first impression…",
+    "guarantee": "we make sure it works in your favor",
+
     "description": {
       "line 1": "Because we don’t just build websites…",
       "line 2": "we build tools that bring you clients",
@@ -34,15 +40,72 @@
       "line 8": "we make sure it works in your favor"
     }
   },
-  "time_line" : {
-    "title" : "Here's how your journey with us goes:",
-    "description" :"No guesswork. Just a clear, transparent methodology designed to deliver outstanding results on time and on budget.",
-    "step1" : "Understanding the business and website goals",
-    "step2" : "Competitor analysis",
-    "step3" : "User experience design",
-    "step4" : "Development and implementation",
-    "step5" : "Launch and continuous improvement",
-    "footer" : "No hassle... every step is clear"
+
+  "projects": {
+    "subtitle": "Not just work... These are results",
+    "title": "Featured Work",
+    "description": "A selection of our recent digital products. Built for performance, designed to convert.",
+    "exampleTitle": "Example 1: Gym Website",
+    "problem": "Problem: Customer can't find info easily and leaves quickly",
+    "solution": "Solution: Direct CTA + Content Organization + Clear Experience",
+    "result": "Result: More time on site + Faster decisions + Higher trust",
+    "viewProject": "View Project",
+    "viewAll": "View All Projects"
+  },
+
+  "feedback": {
+    "title": "Client Feedback",
+    "subtitle": "We don't just say we're good... see what our clients say",
+    "quote1": "The website made a huge difference in our business",
+    "quote2": "We started receiving more clients",
+    "quote3": "The experience became much easier"
+  },
+
+  "timeline": {
+    "title": "Your Journey With Us:",
+    "step1": "Understanding business and website goals",
+    "step2": "Competitor analysis",
+    "step3": "User experience design",
+    "step4": "Development and implementation",
+    "step5": "Launch and continuous improvement",
+    "footer": "No complexity... every step is clear",
+    "description": "No guesswork. Just a clear, transparent methodology designed to deliver outstanding results on time and on budget."
+  },
+
+  "time_line": {
+    "title": "Here's how your journey with us goes:",
+    "description": "No guesswork. Just a clear, transparent methodology designed to deliver outstanding results on time and on budget.",
+    "step1": "Understanding the business and website goals",
+    "step2": "Competitor analysis",
+    "step3": "User experience design",
+    "step4": "Development and implementation",
+    "step5": "Launch and continuous improvement",
+    "footer": "No hassle... every step is clear"
+  },
+
+  "contact": {
+    "title": "Contact Us",
+    "line1": "Since you made it here...",
+    "line2": "You really want to start the right way",
+    "line3": "And you don't just want any website... You want something that stands out",
+    "line4": "Let us help you achieve that",
+    "line5": "Contact us and take the first step",
+    "button": "Get in touch",
+    "namePlaceholder": "Your Name",
+    "emailPlaceholder": "Your Email",
+    "messagePlaceholder": "Tell us about your project...",
+    "sending": "Sending..."
+  },
+
+  "footer": {
+    "quickLinks": "Quick Links",
+    "connect": "Connect",
+    "messageForClient": "A futuristic web development agency building high-performance digital experiences for ambitious businesses.",
+    "services": "Services",
+    "work": "Work",
+    "whyChooseUs": "Why Choose Us",
+    "contact": "Contact",
+    "privacyPolicy": "Privacy Policy",
+    "termsOfService": "Terms of Service"
   }
 }
-

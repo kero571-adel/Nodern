@@ -1,12 +1,27 @@
 "use client";
-import { useTranslations } from "next-intl";
+
+import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
-import { useLocale } from "next-intl";
+import {
+  HiOutlineLightBulb,
+  HiOutlineMagnifyingGlass,
+  HiOutlinePaintBrush,
+  HiOutlineCodeBracket,
+  HiOutlineRocketLaunch,
+} from "react-icons/hi2";
+
 export default function Timeline() {
-  const t = useTranslations("time_line");
+  const t = useTranslations("timeline");
   const locale = useLocale();
 
-  const steps = ["step1", "step2", "step3", "step4", "step5"];
+  const steps = [
+    { key: "step1", icon: HiOutlineLightBulb },
+    { key: "step2", icon: HiOutlineMagnifyingGlass },
+    { key: "step3", icon: HiOutlinePaintBrush },
+    { key: "step4", icon: HiOutlineCodeBracket },
+    { key: "step5", icon: HiOutlineRocketLaunch },
+  ];
+
   const containerVariants = {
     hidden: {},
     visible: {
@@ -16,123 +31,97 @@ export default function Timeline() {
     },
   };
 
-  const liVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        when: "beforeChildren",
-        staggerChildren: 0.08,
-      },
-    },
-  };
-
-  const circleVariants = {
-    hidden: { scale: 0.6, opacity: 0, rotate: -8 },
-    visible: {
-      scale: 1,
-      opacity: 1,
-      rotate: 0,
-      transition: { type: "spring", stiffness: 120, damping: 14 },
-    },
-  };
-
-  const lineVariants = {
-    hidden: { scaleX: 0 },
-    visible: { scaleX: 1, transition: { duration: 0.6, ease: "easeOut" } },
-  };
-
-  const arrowVariants = {
-    hidden: (x) => ({ opacity: 0, x }),
-    visible: () => ({ opacity: 1, x: 0, transition: { duration: 0.35 } }),
-  };
-
   return (
-    <>
-      <div className="container mx-auto py-10">
+    <section className="py-32 bg-black relative overflow-hidden">
+      <div className="container w-11/12 mx-auto relative z-10">
         <motion.h2
-          className="text-4xl font-bold mb-5 inline-block"
-          initial={{ backgroundPosition: "0% 50%" }}
-          animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-          style={{
-            backgroundImage:
-              "linear-gradient(90deg, #5d00ffff, rgba(208, 8, 235, 1), #fff)",
-            backgroundClip: "text",
-            WebkitBackgroundClip: "text",
-            color: "transparent",
-            backgroundSize: "200% 200%",
-          }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-6xl font-bold text-center text-white mb-8"
         >
           {t("title")}
         </motion.h2>
 
-        <p className="text-lg text-gray-400 mb-10">{t("description")}</p>
+        <p className="text-lg text-gray-400 mb-16 text-center">
+          {t("description")}
+        </p>
 
-        <motion.ol
-          className="flex items-center justify-center"
+        <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true }}
+          className="relative"
         >
-          {steps.map((step, idx) => {
-            const isLast = idx === steps.length - 1;
+          <div className="grid lg:grid-cols-5 gap-8">
+            {steps.map((step, index) => {
+              const Icon = step.icon;
 
-            // origin for connector animation: left for LTR, right for RTL
-            const originX = locale === "ar" ? 1 : 0;
-            const arrowOffset = locale === "ar" ? 6 : -6;
-
-            return (
-              <motion.li
-                key={idx}
-                className="flex items-center"
-                variants={liVariants}
-              >
+              return (
                 <motion.div
-                  className="md:w-32 md:h-32 rounded-full border-3 border-[#322552] bg-black flex items-center justify-center text-1xl md:text-1xl font-semibold text-white text-center leading-none"
-                  variants={circleVariants}
-                  whileHover={{ scale: 1.06 }}
-                  whileTap={{ scale: 0.98 }}
+                  key={index}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="flex flex-col items-center text-center group relative"
                 >
-                  {t(step)}
-                </motion.div>
+                  <div className="w-20 h-20 rounded-3xl bg-blue-600/10 border border-blue-600/20 flex items-center justify-center mb-6 group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-500 relative shadow-[0_0_20px_rgba(37,99,235,0.1)] group-hover:shadow-[0_0_30px_rgba(37,99,235,0.4)]">
+                    <Icon className="text-3xl text-blue-500 group-hover:text-white transition-colors" />
 
-                {!isLast && (
-                  <div className="w-32 md:w-40 mx-3 flex items-center relative">
-                    {/* animated line */}
-                    <motion.div
-                      className="absolute inset-0 flex items-center"
-                      variants={lineVariants}
-                      style={{ transformOrigin: `${originX} 50%` }}
-                    >
-                      <div className="h-px bg-gray-400 w-full" />
-                    </motion.div>
-
-                    {/* arrow icon */}
-                    <motion.svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className={`w-4 h-4 text-gray-400 z-10 absolute ${locale === "ar" ? "-left-3" : "-right-3"} top-1/2 transform -translate-y-1/2`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      aria-hidden="true"
-                      variants={arrowVariants}
-                      custom={arrowOffset}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d={locale === "ar" ? "M15 19l-7-7 7-7" : "M9 5l7 7-7 7"}
-                      />
-                    </motion.svg>
+                    <div className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gray-900 border border-blue-600/30 flex items-center justify-center text-xs font-bold text-blue-400">
+                      {index + 1}
+                    </div>
                   </div>
-                )}
-              </motion.li>
-            );
-          })}
-        </motion.ol>
+
+                  <h4 className="text-xl font-bold text-white mb-2 transition-colors group-hover:text-blue-400">
+                    {t(step.key)}
+                  </h4>
+
+                  {/* arrows between items */}
+                  {index !== steps.length - 1 && (
+                    <div
+                      className={`hidden lg:flex absolute top-10 ${
+                        locale === "ar"
+                          ? "-left-16 rotate-180"
+                          : "-right-16"
+                      } items-center`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-10 h-10 text-blue-500 opacity-60"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 5l7 7-7 7"
+                        />
+                      </svg>
+                    </div>
+                  )}
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.6 }}
+          className="mt-24 text-center"
+        >
+          <p className="inline-block px-8 py-3 rounded-2xl bg-white/[0.03] border border-white/10 text-xl md:text-2xl text-gray-400 font-medium tracking-wide">
+            {t("footer")}
+          </p>
+        </motion.div>
       </div>
-    </>
+    </section>
   );
 }
