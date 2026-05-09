@@ -6,6 +6,7 @@
     "contact": "Contact",
     "startProject": "Start a project"
   },
+
   "hero": {
     "title": "Hello",
     "description": "We are a digital agency that specializes in creating beautiful and functional websites.",
@@ -14,17 +15,32 @@
     "line3": "Not just something that looks good… but something that helps people understand you, trust you, and contact you",
     "scrollText": "⬇ Scroll down and see how we do it"
   },
+
   "whyChooseUs": {
     "title": "Why Choose Us?",
     "line1": "Because we don’t just build websites…",
     "line2": "we build tools that bring you clients",
+
     "item1": "We understand your business before writing a single line of code ✔",
     "item2": "We analyze competitors to make you stand out ✔",
     "item3": "We design for conversion, not just visuals ✔",
     "item4": "Fast, smooth experience that keeps users engaged ✔",
+
     "impression": "90% of decisions start from the first impression…",
-    "guarantee": "we make sure it works in your favor"
+    "guarantee": "we make sure it works in your favor",
+
+    "description": {
+      "line 1": "Because we don’t just build websites…",
+      "line 2": "we build tools that bring you clients",
+      "line 3": "✔ We understand your business before writing a single line of code",
+      "line 4": "✔ We analyze competitors to make you stand out",
+      "line 5": "✔ We design for conversion, not just visuals",
+      "line 6": "✔ Fast, smooth experience that keeps users engaged",
+      "line 7": "90% of decisions start from the first impression…",
+      "line 8": "we make sure it works in your favor"
+    }
   },
+
   "projects": {
     "subtitle": "Not just work... These are results",
     "title": "Featured Work",
@@ -36,6 +52,7 @@
     "viewProject": "View Project",
     "viewAll": "View All Projects"
   },
+
   "feedback": {
     "title": "Client Feedback",
     "subtitle": "We don't just say we're good... see what our clients say",
@@ -43,6 +60,7 @@
     "quote2": "We started receiving more clients",
     "quote3": "The experience became much easier"
   },
+
   "timeline": {
     "title": "Your Journey With Us:",
     "step1": "Understanding business and website goals",
@@ -50,8 +68,21 @@
     "step3": "User experience design",
     "step4": "Development and implementation",
     "step5": "Launch and continuous improvement",
-    "footer": "No complexity... every step is clear"
+    "footer": "No complexity... every step is clear",
+    "description": "No guesswork. Just a clear, transparent methodology designed to deliver outstanding results on time and on budget."
   },
+
+  "time_line": {
+    "title": "Here's how your journey with us goes:",
+    "description": "No guesswork. Just a clear, transparent methodology designed to deliver outstanding results on time and on budget.",
+    "step1": "Understanding the business and website goals",
+    "step2": "Competitor analysis",
+    "step3": "User experience design",
+    "step4": "Development and implementation",
+    "step5": "Launch and continuous improvement",
+    "footer": "No hassle... every step is clear"
+  },
+
   "contact": {
     "title": "Contact Us",
     "line1": "Since you made it here...",
@@ -65,6 +96,7 @@
     "messagePlaceholder": "Tell us about your project...",
     "sending": "Sending..."
   },
+
   "footer": {
     "quickLinks": "Quick Links",
     "connect": "Connect",
