@@ -20,5 +20,29 @@
     "contact": "Contact",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service"
-  } 
+  },
+  "whyChooseUs": {
+    "title": "Why Choose Us ?",
+    "description": {
+      "line 1": "Because we don’t just build websites…",
+      "line 2": "we build tools that bring you clients",
+      "line 3": "✔ We understand your business before writing a single line of code",
+      "line 4": "✔ We analyze competitors to make you stand out",
+      "line 5": "✔ We design for conversion, not just visuals",
+      "line 6": "✔ Fast, smooth experience that keeps users engaged",
+      "line 7": "90% of decisions start from the first impression…",
+      "line 8": "we make sure it works in your favor"
+    }
+  },
+  "time_line" : {
+    "title" : "Here's how your journey with us goes:",
+    "description" :"No guesswork. Just a clear, transparent methodology designed to deliver outstanding results on time and on budget.",
+    "step1" : "Understanding the business and website goals",
+    "step2" : "Competitor analysis",
+    "step3" : "User experience design",
+    "step4" : "Development and implementation",
+    "step5" : "Launch and continuous improvement",
+    "footer" : "No hassle... every step is clear"
+  }
 }
+
