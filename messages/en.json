@@ -20,5 +20,78 @@
     "contact": "Contact",
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service"
-  } 
+  },
+  "FeaturedWork": {
+    "title": "Featured Work",
+    "description": "A selection of our recent digital products. Built for performance, designed to convert.",
+    "viewProject": "View Project",
+    "viewAll": "View All Projects",
+
+    "eliteeats": {
+      "problemLabel": "Problem:",
+      "problem": "Restaurant owners struggled with customers constantly asking about the menu and couldn't respond quickly.",
+      "solutionLabel": "Solution:",
+      "solution": "We built a digital menu web app where customers browse meals and order directly via WhatsApp, streamlining the process.",
+      "features": {
+        "feature1": "Dark UI Design",
+        "feature2": "Smart Cart System",
+        "feature3": "WhatsApp Direct Order"
+      }
+    },
+    "pharmacy": {
+      "problemLabel": "Problem:",
+      "problem": "Pharmacies needed a professional online presence to build trust and make services accessible.",
+      "solutionLabel": "Solution:",
+      "solution": "A modern landing page optimized for conversions with fast loading, SEO, and smooth UX across devices.",
+      "features": {
+        "feature1": "Responsive Design",
+        "feature2": "SEO Optimized",
+        "feature3": "Framer Motion"
+      }
+    },
+    "portfolio": {
+      "problemLabel": "Problem:",
+      "problem": "Professionals needed a standout way to showcase skills and attract clients.",
+      "solutionLabel": "Solution:",
+      "solution": "A sleek portfolio built with Next.js 14, featuring smooth animations, interactive sections, and contact form.",
+      "features": {
+        "feature1": "Next.js 14",
+        "feature2": "Interactive Animations",
+        "feature3": "Fully Responsive"
+      }
+    },
+    "titan": {
+      "problemLabel": "Problem:",
+      "problem": "Gym owners needed a centralized platform to manage memberships, trainers, and subscriptions.",
+      "solutionLabel": "Solution:",
+      "solution": "A comprehensive gym platform with user auth, trainer profiles, flexible subscriptions, and SEO optimization.",
+      "features": {
+        "feature1": "User Management",
+        "feature2": "Subscription Plans",
+        "feature3": "Trainer System"
+      }
+    },
+    "restaurant": {
+      "problemLabel": "Problem:",
+      "problem": "Restaurants needed an online ordering system that converts visitors without complexity.",
+      "solutionLabel": "Solution:",
+      "solution": "A fast restaurant app with smart cart, instant quantity updates, and auto-save for seamless ordering.",
+      "features": {
+        "feature1": "Smart Cart",
+        "feature2": "Fast Performance",
+        "feature3": "SEO Ready"
+      }
+    },
+    "coza": {
+      "problemLabel": "Problem:",
+      "problem": "E-commerce businesses needed a store with smooth shopping experience that converts visitors.",
+      "solutionLabel": "Solution:",
+      "solution": "A professional store with organized products, smart cart with auto-pricing, wishlist, and advanced filtering.",
+      "features": {
+        "feature1": "Smart Cart",
+        "feature2": "Wishlist System",
+        "feature3": "Advanced Filtering"
+      }
+    }
+  }
 }
