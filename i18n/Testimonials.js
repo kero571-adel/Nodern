@@ -1,152 +1,332 @@
 "use client";
-import { useState } from "react";
-import { useTranslations } from "next-intl"; // لو بتستعملوا next-intl
-// أو لو بتستعملوا i18next:
-// import { useTranslation } from "react-i18next";
+
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useTranslations, useLocale } from "next-intl";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 export default function Testimonials() {
-  // الطريقة الأولى: لو بتستعملوا next-intl (الأشهر مع Next.js App Router)
   const t = useTranslations("testimonials");
-  const locale = "ar"; // هاتها من الـ params أو useParams
+  const locale = useLocale();
+  const prefersReducedMotion = useReducedMotion();
+  const carouselRef = useRef(null);
+  const isPaused = useRef(false);
 
-  // البيانات بتاعة testimonials
-  const testimonials = [
+  // Testimonials data - English
+  const testimonialsEn = useMemo(() => [
     {
-      text: "Modern completely transformed our online presence. Our conversion rate increased by 140% within the first month of launching the new site.",
-      name: "Sarah Jenkins",
-      role: "CMO, TechFlow Solutions",
+      text: t("testimonial1.text"),
+      name: t("testimonial1.name"),
+      role: t("testimonial1.role"),
     },
     {
-      text: "Amazing experience working with Modern team!",
-      name: "Ahmed Ali",
-      role: "CEO, Startup",
+      text: t("testimonial2.text"),
+      name: t("testimonial2.name"),
+      role: t("testimonial2.role"),
     },
     {
-      text: "Highly professional and fast delivery.",
-      name: "Sara Mohamed",
-      role: "Marketing Manager",
+      text: t("testimonial3.text"),
+      name: t("testimonial3.name"),
+      role: t("testimonial3.role"),
     },
-  ];
+  ], [t]);
 
-  // نسخة عربية
-  const testimonialsAr = [
+  // Testimonials data - Arabic (fallback if translations not available)
+  const testimonialsAr = useMemo(() => [
     {
-      text: "قامت مودرن بتحويل وجودنا على الإنترنت بالكامل. زاد معدل التحويل لدينا بنسبة 140٪ خلال الشهر الأول من إطلاق الموقع الجديد.",
-      name: "سارة جنكينز",
-      role: "مديرة التسويق، TechFlow Solutions",
+      text: t("testimonial1.textAr") || "قامت مودرن بتحويل وجودنا على الإنترنت بالكامل. زاد معدل التحويل لدينا بنسبة 140٪ خلال الشهر الأول من إطلاق الموقع الجديد.",
+      name: t("testimonial1.nameAr") || "سارة جنكينز",
+      role: t("testimonial1.roleAr") || "مديرة التسويق، TechFlow Solutions",
     },
     {
-      text: "تجربة رائعة مع فريق مودرن!",
-      name: "أحمد علي",
-      role: "الرئيس التنفيذي، شركة ناشئة",
+      text: t("testimonial2.textAr") || "تجربة رائعة مع فريق مودرن!",
+      name: t("testimonial2.nameAr") || "أحمد علي",
+      role: t("testimonial2.roleAr") || "الرئيس التنفيذي، شركة ناشئة",
     },
     {
-      text: "احترافية عالية وتسليم سريع.",
-      name: "سارة محمد",
-      role: "مديرة التسويق",
+      text: t("testimonial3.textAr") || "احترافية عالية وتسليم سريع.",
+      name: t("testimonial3.nameAr") || "سارة محمد",
+      role: t("testimonial3.roleAr") || "مديرة التسويق",
     },
-  ];
+  ], [t]);
 
   const [index, setIndex] = useState(0);
-  
-  // اختار البيانات حسب اللغة (localStorage, context, or props)
-  // هنفترض إن اللغة مخزنة في localStorage أو context
-  const [lang, setLang] = useState("en");
-  
-  // جيب اللغة من الـ URL أو الـ context بتاعكم
-  // لو عندكم LanguageSwitcher، خلي الـ language تجي من props
-  const currentData = lang === "ar" ? testimonialsAr : testimonials;
+  const isRtl = locale === "ar";
+  const currentData = isRtl ? testimonialsAr : testimonialsEn;
   const currentItem = currentData[index];
 
-  const prev = () => {
-    setIndex(index === 0 ? currentData.length - 1 : index - 1);
-  };
+  // Navigation handlers
+  const prev = useCallback(() => {
+    setIndex((i) => (i === 0 ? currentData.length - 1 : i - 1));
+  }, [currentData.length]);
 
-  const next = () => {
-    setIndex(index === currentData.length - 1 ? 0 : index + 1);
-  };
+  const next = useCallback(() => {
+    setIndex((i) => (i === currentData.length - 1 ? 0 : i + 1));
+  }, [currentData.length]);
 
-  // استمع لتغيير اللغة (لو عندكم context)
-  // useEffect(() => {
-  //   const savedLang = localStorage.getItem("language") || "en";
-  //   setLang(savedLang);
-  // }, []);
+  const goToSlide = useCallback((i) => {
+    setIndex(i);
+    isPaused.current = false;
+  }, []);
+
+  // Auto-rotate with pause on hover/focus
+  useEffect(() => {
+    if (prefersReducedMotion) return;
+    
+    const interval = setInterval(() => {
+      if (!isPaused.current) {
+        next();
+      }
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [next, prefersReducedMotion]);
+
+  // Pause rotation on hover/focus for accessibility
+  const handleMouseEnter = useCallback(() => { isPaused.current = true; }, []);
+  const handleMouseLeave = useCallback(() => { isPaused.current = false; }, []);
+
+  // Keyboard navigation support
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === "ArrowLeft" || (isRtl && e.key === "ArrowRight")) {
+      e.preventDefault();
+      prev();
+    } else if (e.key === "ArrowRight" || (isRtl && e.key === "ArrowLeft")) {
+      e.preventDefault();
+      next();
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      goToSlide(0);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      goToSlide(currentData.length - 1);
+    }
+  }, [prev, next, goToSlide, isRtl, currentData.length]);
+
+  // Touch swipe support for mobile
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+
+  const handleTouchStart = useCallback((e) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback((e) => {
+    touchEndX.current = e.changedTouches[0].clientX;
+    handleSwipe();
+  }, []);
+
+  const handleSwipe = useCallback(() => {
+    const swipeThreshold = 50;
+    const diff = touchStartX.current - touchEndX.current;
+    
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0) {
+        next(); // Swiped left → next
+      } else {
+        prev(); // Swiped right → prev
+      }
+    }
+  }, [next, prev]);
+
+  // Animation variants with reduced motion support
+  const slideVariants = useMemo(() => ({
+    hidden: { opacity: 0, y: prefersReducedMotion ? 0 : 20, scale: prefersReducedMotion ? 1 : 0.98 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: { 
+        duration: prefersReducedMotion ? 0.2 : 0.5, 
+        ease: prefersReducedMotion ? "linear" : "easeOut" 
+      }
+    },
+    exit: { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : -20,
+      transition: { duration: prefersReducedMotion ? 0.1 : 0.3 }
+    }
+  }), [prefersReducedMotion]);
+
+  // Directional arrows based on RTL
+  const prevArrow = isRtl ? "›" : "‹";
+  const nextArrow = isRtl ? "‹" : "›";
+  const quoteMark = isRtl ? "❝" : "❞";
 
   return (
     <section 
-      dir={lang === "ar" ? "rtl" : "ltr"}
-      className="w-full min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden py-20"
+      dir={isRtl ? "rtl" : "ltr"}
+      className="w-full min-h-screen flex items-center justify-center bg-black text-white relative overflow-hidden py-16 sm:py-20 px-4 sm:px-6"
+      style={{ 
+        paddingTop: 'calc(4rem + env(safe-area-inset-top))',
+        paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))'
+      }}
+      aria-labelledby="testimonials-heading"
     >
-      {/* gradient blur background */}
-      <div className="absolute w-[900px] h-[900px] bg-purple-700 opacity-20 blur-[150px] rounded-full"></div>
+      {/* gradient blur background - responsive sizing */}
+      <div 
+        className="absolute w-[400px] sm:w-[600px] md:w-[900px] h-[400px] sm:h-[600px] md:h-[900px] bg-purple-700 opacity-20 blur-[100px] sm:blur-[120px] md:blur-[150px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+        aria-hidden="true"
+      />
 
-      <div className="relative z-10 text-center max-w-3xl px-6">
-        {/* title */}
-        <h2 className="text-6xl md:text-6xl font-semibold mb-12">
-          {lang === "ar" ? "قصص العملاء" : "Client Stories"}
-        </h2>
+      <div 
+        ref={carouselRef}
+        className="relative z-10 text-center max-w-3xl px-4 sm:px-6 mx-auto"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onFocus={handleMouseEnter}
+        onBlur={handleMouseLeave}
+        onKeyDown={handleKeyDown}
+        tabIndex="0"
+        role="region"
+        aria-label={t("carouselLabel")}
+        aria-roledescription="carousel"
+      >
+        {/* Title */}
+        <motion.h2 
+          id="testimonials-heading"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mb-8 sm:mb-10 md:mb-12 leading-tight"
+        >
+          {isRtl ? t("titleAr") : t("titleEn")}
+        </motion.h2>
 
-        {/* quote icon */}
-        <div className="text-7xl text-purple-500 mb-6">
-          {lang === "ar" ? "❝" : "”"}
+        {/* Quote Icon */}
+        <div 
+          className="text-5xl sm:text-6xl md:text-7xl text-purple-500 mb-4 sm:mb-6 select-none"
+          aria-hidden="true"
+        >
+          {quoteMark}
         </div>
 
-        {/* testimonial text */}
-        <p className="text-lg md:text-2xl leading-relaxed text-gray-200 mb-8">
-          {currentItem.text}
-        </p>
+        {/* Testimonial Text - Animated with AnimatePresence */}
+        <div className="relative min-h-[120px] sm:min-h-[140px] flex items-center justify-center mb-6 sm:mb-8">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={index}
+              variants={slideVariants}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              className="text-base sm:text-lg md:text-2xl leading-relaxed text-gray-200 px-2"
+            >
+              {currentItem.text}
+            </motion.p>
+          </AnimatePresence>
+        </div>
 
-        {/* name */}
-        <h4 className="text-xl font-semibold tracking-wide">
-          {currentItem.name}
-        </h4>
+        {/* Name */}
+        <AnimatePresence mode="wait">
+          <motion.h4
+            key={`name-${index}`}
+            variants={slideVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="text-lg sm:text-xl font-semibold tracking-wide mb-1"
+          >
+            {currentItem.name}
+          </motion.h4>
+        </AnimatePresence>
 
-        {/* role */}
-        <p className="text-gray-400 text-sm mb-10">
-          {currentItem.role}
-        </p>
+        {/* Role */}
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={`role-${index}`}
+            variants={slideVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="text-gray-400 text-xs sm:text-sm mb-8 sm:mb-10"
+          >
+            {currentItem.role}
+          </motion.p>
+        </AnimatePresence>
 
-        {/* navigation controls */}
-        <div className="flex items-center justify-center gap-6">
-          {/* prev button */}
+        {/* Navigation Controls */}
+        <div className="flex items-center justify-center gap-4 sm:gap-6">
+          
+          {/* Prev Button */}
           <button
             onClick={prev}
-            className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-gray-800 hover:border-purple-500 transition-all duration-300"
-            aria-label="Previous testimonial"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-600 flex items-center justify-center hover:bg-gray-800 hover:border-purple-500 transition-all duration-300 min-h-[44px] min-w-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+            aria-label={isRtl ? t("nextAria") : t("prevAria")}
+            aria-controls="testimonial-carousel"
           >
-            <span className="text-2xl">
-              {lang === "ar" ? "›" : "‹"}
-            </span>
+            <span className="text-xl sm:text-2xl" aria-hidden="true">{prevArrow}</span>
           </button>
 
-          {/* dots */}
-          <div className="flex gap-3">
+          {/* Dots Indicator */}
+          <div 
+            id="testimonial-carousel"
+            className="flex gap-2 sm:gap-3" 
+            role="tablist"
+            aria-label={t("slideIndicator")}
+          >
             {currentData.map((_, i) => (
               <button
                 key={i}
-                onClick={() => setIndex(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
+                onClick={() => goToSlide(i)}
+                role="tab"
+                aria-selected={i === index}
+                aria-controls={`slide-${i}`}
+                className={`h-1.5 sm:h-2 rounded-full transition-all duration-300 min-w-[6px] sm:min-w-[8px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-purple-500/50 ${
                   i === index
-                    ? "w-8 bg-purple-500"
-                    : "w-2 bg-gray-600 hover:bg-gray-400"
+                    ? "w-6 sm:w-8 bg-purple-500"
+                    : "w-1.5 sm:w-2 bg-gray-600 hover:bg-gray-400"
                 }`}
-                aria-label={`Go to testimonial ${i + 1}`}
+                aria-label={t("goToSlide", { number: i + 1 })}
               />
             ))}
           </div>
 
-          {/* next button */}
+          {/* Next Button */}
           <button
             onClick={next}
-            className="w-10 h-10 rounded-full border border-gray-600 flex items-center justify-center hover:bg-gray-800 hover:border-purple-500 transition-all duration-300"
-            aria-label="Next testimonial"
+            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-600 flex items-center justify-center hover:bg-gray-800 hover:border-purple-500 transition-all duration-300 min-h-[44px] min-w-[44px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-purple-500/50"
+            aria-label={isRtl ? t("prevAria") : t("nextAria")}
+            aria-controls="testimonial-carousel"
           >
-            <span className="text-2xl">
-              {lang === "ar" ? "‹" : "›"}
-            </span>
+            <span className="text-xl sm:text-2xl" aria-hidden="true">{nextArrow}</span>
           </button>
         </div>
+
+        {/* Live Region for Screen Readers */}
+        <div className="sr-only" aria-live="polite" aria-atomic="true">
+          {t("slide")} {index + 1} {t("of")} {currentData.length}: {currentItem.text}
+        </div>
       </div>
+
+      {/* CSS for reduced motion & focus styles */}
+      <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+          }
+        }
+        
+        /* Focus visible for keyboard navigation */
+        button:focus-visible {
+          outline: 2px solid #a78bfa;
+          outline-offset: 2px;
+        }
+        
+        /* Screen reader only utility */
+        .sr-only {
+          position: absolute;
+          width: 1px;
+          height: 1px;
+          padding: 0;
+          margin: -1px;
+          overflow: hidden;
+          clip: rect(0, 0, 0, 0);
+          white-space: nowrap;
+          border: 0;
+        }
+      `}</style>
     </section>
   );
 }

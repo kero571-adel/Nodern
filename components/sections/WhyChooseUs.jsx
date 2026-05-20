@@ -1,20 +1,22 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { HiOutlineCheckBadge } from "react-icons/hi2";
+import { useCallback, useMemo } from "react";
 
 export default function WhyChooseUs() {
   const t = useTranslations("whyChooseUs");
+  const prefersReducedMotion = useReducedMotion();
 
-  const items = [
+  const items = useMemo(() => [
     { key: "item1" },
     { key: "item2" },
     { key: "item3" },
     { key: "item4" },
-  ];
+  ], []);
 
-  const lines = [
+  const lines = useMemo(() => [
     "description.line 1",
     "description.line 2",
     "description.line 3",
@@ -23,41 +25,103 @@ export default function WhyChooseUs() {
     "description.line 6",
     "description.line 7",
     "description.line 8",
-  ];
+  ], []);
 
-  const headingVariant = {
+  const headingVariant = useMemo(() => ({
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-
-  const listContainer = {
-    hidden: {},
-    show: { transition: { staggerChildren: 0.12, delayChildren: 0.5 } },
-  };
-
-  const lineVariant = {
-    hidden: { opacity: 0, width: 0 },
-    show: (i = 1) => ({
+    show: {
       opacity: 1,
-      width: "100%",
-      transition: { duration: 0.8, ease: "easeInOut", delay: i * 0.03 },
-    }),
-  };
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.3 : 0.6 },
+    },
+  }), [prefersReducedMotion]);
+
+  const listContainer = useMemo(() => ({
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: prefersReducedMotion ? 0 : 0.1,
+        delayChildren: prefersReducedMotion ? 0 : 0.3,
+      },
+    },
+  }), [prefersReducedMotion]);
+
+  const lineVariant = useMemo(() => ({
+    hidden: { opacity: 0, y: 10 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: prefersReducedMotion ? 0.3 : 0.5,
+        ease: "easeOut",
+      },
+    },
+  }), [prefersReducedMotion]);
+
+  const itemVariant = useMemo(() => ({
+    hidden: { opacity: 0, y: 20 },
+    show: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: prefersReducedMotion ? 0.3 : 0.5 },
+    },
+  }), [prefersReducedMotion]);
+
+  const gradientAnimation = useMemo(() => ({
+    backgroundPosition: prefersReducedMotion
+      ? "0% 50%"
+      : ["0% 50%", "100% 50%", "0% 50%"],
+  }), [prefersReducedMotion]);
+
+  const gradientTransition = useMemo(() => ({
+    duration: prefersReducedMotion ? 0 : 6,
+    repeat: prefersReducedMotion ? 0 : Infinity,
+    ease: "linear",
+  }), [prefersReducedMotion]);
+
+  const handleKeyDown = useCallback((e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+    }
+  }, []);
+
+  const getPulseAnimation = useCallback((idx) => ({
+    backgroundColor: prefersReducedMotion
+      ? "#7c3aed"
+      : ["#7c3aed", "#a78bfa", "#7c3aed"],
+  }), [prefersReducedMotion]);
+
+  const getPulseTransition = useCallback((idx) => ({
+    duration: prefersReducedMotion ? 0 : 4 + idx * 0.2,
+    repeat: prefersReducedMotion ? 0 : Infinity,
+    ease: "linear",
+  }), [prefersReducedMotion]);
 
   return (
-    <section id="about" className="py-24 relative bg-black">
-      <div className="container w-11/12 mx-auto">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          {/* Left Content */}
+    <section
+      id="about"
+      className="relative bg-black/20 px-4 sm:px-6"
+      style={{
+        paddingTop: "calc(5rem + env(safe-area-inset-top))",
+        paddingBottom: "calc(5rem + env(safe-area-inset-bottom))",
+      }}
+      aria-labelledby="why-choose-us-heading"
+    >
+      <div className="container w-full sm:w-11/12 mx-auto">
+        <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start lg:items-center">
+
+          {/* ── Left Content ── */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
+            initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6"
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: prefersReducedMotion ? 0.3 : 0.8 }}
+            className="space-y-5 sm:space-y-6"
           >
+            {/* Title */}
             <motion.h2
-              className="text-4xl md:text-5xl font-bold"
+              id="why-choose-us-heading"
+              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"
               variants={headingVariant}
               initial="hidden"
               whileInView="show"
@@ -74,53 +138,53 @@ export default function WhyChooseUs() {
                   backgroundSize: "200% 200%",
                   backgroundPosition: "0% 50%",
                 }}
-                animate={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-                }}
-                transition={{
-                  duration: 6,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
+                animate={gradientAnimation}
+                transition={gradientTransition}
               >
                 {t("title")}
               </motion.span>
             </motion.h2>
 
-            <p className="text-2xl text-blue-500 font-semibold italic">
+            <p className="text-base sm:text-xl md:text-2xl text-blue-500 font-semibold italic">
               {t("line1")}
             </p>
 
-            <p className="text-3xl md:text-4xl font-bold text-white">
+            <p className="text-xl sm:text-3xl md:text-4xl font-bold text-white leading-tight">
               {t("line2")}
             </p>
 
-            <div className="pt-8 space-y-4">
-              <p className="text-xl text-gray-300 font-medium border-l-4 border-blue-600 pl-4">
+            <div className="pt-4 sm:pt-8 space-y-3 sm:space-y-4">
+              <p className="text-sm sm:text-lg md:text-xl text-gray-300 font-medium border-l-4 border-blue-600 pl-3 sm:pl-4">
                 {t("impression")}
               </p>
-
-              <p className="text-xl text-blue-400 font-bold">
+              <p className="text-sm sm:text-lg md:text-xl text-blue-400 font-bold">
                 {t("guarantee")}
               </p>
             </div>
 
             {/* Features */}
-            <div className="grid gap-6 pt-6">
-              {items.map((item, index) => (
+            <div
+              className="grid gap-3 sm:gap-5 pt-2 sm:pt-6"
+              role="list"
+              aria-label={t("featuresList")}
+            >
+              {items.map((item) => (
                 <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  key={item.key}
+                  variants={itemVariant}
+                  initial="hidden"
+                  whileInView="show"
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group flex items-start gap-4"
+                  className="p-4 sm:p-6 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all group flex items-start gap-3 sm:gap-4 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:ring-offset-2 focus:ring-offset-black touch-manipulation"
+                  role="listitem"
+                  tabIndex={0}
+                  onKeyDown={handleKeyDown}
+                  aria-label={t(`${item.key}Aria`)}
                 >
-                  <div className="mt-1">
-                    <HiOutlineCheckBadge className="text-2xl text-blue-500 group-hover:scale-110 transition-transform" />
+                  <div className="mt-0.5 flex-shrink-0" aria-hidden="true">
+                    <HiOutlineCheckBadge className="text-lg sm:text-2xl text-blue-500 group-hover:scale-110 transition-transform" />
                   </div>
-
-                  <p className="text-lg md:text-xl text-gray-300 group-hover:text-white transition-colors">
+                  <p className="text-sm sm:text-lg md:text-xl text-gray-300 group-hover:text-white transition-colors leading-relaxed">
                     {t(item.key)}
                   </p>
                 </motion.div>
@@ -128,63 +192,58 @@ export default function WhyChooseUs() {
             </div>
           </motion.div>
 
-          {/* Right Animated Description */}
+          {/* ── Right Animated Description ── */}
           <motion.div
-            className="mt-6 md:mt-0"
+            className="mt-2 sm:mt-8 md:mt-0"
             variants={listContainer}
             initial="hidden"
             whileInView="show"
-            viewport={{ once: true }}
+            viewport={{ once: true, amount: 0.1 }}
+            aria-label={t("processDescription")}
           >
-            <div className="space-y-2">
+            <div className="space-y-2 sm:space-y-3">
               {lines.map((key, idx) => (
                 <motion.div
-                  key={idx}
-                  className="flex items-start gap-3 p-4 rounded-xl"
+                  key={key}
+                  className="flex items-start gap-2 sm:gap-3 p-3 sm:p-4 rounded-xl"
                   style={{ border: "1px solid rgba(255, 255, 255, 0.1)" }}
-                  custom={idx}
                   variants={lineVariant}
+                  role="listitem"
                 >
                   <motion.span
-                    className="mt-1 w-3 h-3 rounded-full flex-shrink-0"
+                    className="mt-1 w-2 h-2 sm:w-3 sm:h-3 rounded-full flex-shrink-0"
                     style={{ backgroundColor: "#7c3aed" }}
-                    animate={{
-                      backgroundColor: ["#7c3aed", "#a78bfa", "#7c3aed"],
-                    }}
-                    transition={{
-                      duration: 4 + idx * 0.2,
-                      repeat: Infinity,
-                      ease: "linear",
-                    }}
+                    animate={getPulseAnimation(idx)}
+                    transition={getPulseTransition(idx)}
+                    aria-hidden="true"
                   />
-
-                  <div
-                    style={{
-                      overflow: "hidden",
-                      display: "block",
-                      whiteSpace: "nowrap",
-                    }}
-                    className="text-sm text-gray-300"
-                  >
-                    <motion.span
-                      style={{ display: "inline-block" }}
-                      initial={{ width: 0, opacity: 0 }}
-                      animate={{ width: "100%", opacity: 1 }}
-                      transition={{
-                        duration: 0.9,
-                        ease: "easeInOut",
-                        delay: 0.2 + idx * 0.06,
-                      }}
-                    >
-                      {t(key)}
-                    </motion.span>
-                  </div>
+                  {/* ✅ شيلنا whiteSpace:nowrap وبقى النص بيلف طبيعي */}
+                  <p className="text-xs sm:text-sm text-gray-300 leading-relaxed">
+                    {t(key)}
+                  </p>
                 </motion.div>
               ))}
             </div>
           </motion.div>
+
         </div>
       </div>
+
+      <style>{`
+        @media (prefers-reduced-motion: reduce) {
+          * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+          }
+        }
+        [role="listitem"]:focus-visible {
+          outline: 2px solid #3b82f6;
+          outline-offset: 2px;
+          border-radius: 1rem;
+        }
+      `}</style>
     </section>
   );
 }
