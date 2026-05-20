@@ -11,20 +11,28 @@
     "title": "Hello",
     "description": "We are a digital agency that specializes in creating beautiful and functional websites.",
     "line1": "If you made it here… you're in the right place",
-    "line2": "To build your business website the right way",
+    "line2_first": "To build your business website ",
+    "line2_second": "the right way",
     "line3": "Not just something that looks good… but something that helps people understand you, trust you, and contact you",
-    "scrollText": "⬇ Scroll down and see how we do it"
+    "scrollText": "⬇ Scroll down and see how we do it",
+    "startProjectAria": "Start your project now",
+    "viewWorkAria": "See our work"
   },
 
   "whyChooseUs": {
     "title": "Why Choose Us?",
     "line1": "Because we don’t just build websites…",
     "line2": "we build tools that bring you clients",
-
     "item1": "We understand your business before writing a single line of code ✔",
     "item2": "We analyze competitors to make you stand out ✔",
     "item3": "We design for conversion, not just visuals ✔",
     "item4": "Fast, smooth experience that keeps users engaged ✔",
+    "featuresList": "Our features",
+    "item1Aria": "We understand your business before coding",
+    "item2Aria": "We analyze competitors",
+    "item3Aria": "Design focused on conversion",
+    "item4Aria": "Speed and high performance",
+    "processDescription": "Process description",
 
     "impression": "90% of decisions start from the first impression…",
     "guarantee": "we make sure it works in your favor",
@@ -58,7 +66,10 @@
     "subtitle": "We don't just say we're good... see what our clients say",
     "quote1": "The website made a huge difference in our business",
     "quote2": "We started receiving more clients",
-    "quote3": "The experience became much easier"
+    "quote3": "The experience became much easier",
+    "slideIndicator": "Slide indicators",
+    "slide": "Slide",
+    "of": "of"
   },
 
   "timeline": {
@@ -69,7 +80,18 @@
     "step4": "Development and implementation",
     "step5": "Launch and continuous improvement",
     "footer": "No complexity... every step is clear",
-    "description": "No guesswork. Just a clear, transparent methodology designed to deliver outstanding results on time and on budget."
+    "description": "No guesswork. Just a clear, transparent methodology designed to deliver outstanding results on time and on budget.",
+    "processSteps": "Process steps",
+    "step1Aria": "Step 1: Understanding business and website goals",
+    "step2Aria": "Step 2: Competitor analysis",
+    "step3Aria": "Step 3: User experience design",
+    "step4Aria": "Step 4: Development and implementation",
+    "step5Aria": "Step 5: Launch and continuous improvement",
+    "step1Description": "We start by understanding your project goals and target audience",
+    "step2Description": "We study competitors to ensure you stand out in the market",
+    "step3Description": "We design a smooth and engaging user experience",
+    "step4Description": "We turn the design into a fast, high-performance website",
+    "step5Description": "We launch the site and continuously monitor and improve it"
   },
 
   "time_line": {
@@ -113,6 +135,10 @@
     "description": "A selection of our recent digital products. Built for performance, designed to convert.",
     "viewProject": "View Project",
     "viewAll": "View All Projects",
+    "projectsList": "Projects list",
+    "openInNewTab": "opens in new tab",
+    "projectAlt": "{name} project screenshot",
+    "featuresList": "Features",
 
     "eliteeats": {
       "problemLabel": "Problem:",

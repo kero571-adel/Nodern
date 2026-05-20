@@ -1,20 +1,33 @@
-import Contact from "@/components/sections/Contact";
-import FeedBack from "@/components/sections/FeedBack";
+"use client";
+import { useState } from "react";
+import SplashScreen from "@/components/SplashScreen";
+import NetworkBackground from "@/components/NetworkBackground";
 import Hero from "@/components/sections/Hero";
-import Projects from "@/components/sections/Projects";
-import Timeline from "@/components/sections/Timeline";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
-import { useTranslations } from "next-intl";
+import Projects from "@/components/sections/Projects";
+import FeedBack from "@/components/sections/FeedBack";
+import Timeline from "@/components/sections/Timeline";
+import Contact from "@/components/sections/Contact";
+
 export default function Home() {
-  const t = useTranslations("nav");
+  const [showSplash, setShowSplash] = useState(true);
+
   return (
     <>
-      <Hero />
-      <WhyChooseUs />
-      <Projects />
-      <FeedBack />
-      <Timeline />
-      <Contact />
+      {showSplash && (
+        <SplashScreen onAnimationComplete={() => setShowSplash(false)} />
+      )}
+      <NetworkBackground />
+      <main
+        className={`relative text-white ${showSplash ? "hidden" : "block"}`}
+      >
+        <Hero />
+        <WhyChooseUs />
+        <Projects />
+        <FeedBack />
+        <Timeline />
+        <Contact />
+      </main>
     </>
   );
 }
