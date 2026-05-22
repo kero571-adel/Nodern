@@ -75,8 +75,8 @@ export default function Hero() {
       className="relative min-h-[100svh] flex flex-col items-center justify-center text-center px-4 sm:px-6 overflow-hidden"
       style={{
         backgroundColor: "transparent",
-        paddingTop: "calc(5rem + env(safe-area-inset-top))",
-        paddingBottom: "calc(6rem + env(safe-area-inset-bottom))",
+        paddingTop: "calc(3.5rem + env(safe-area-inset-top))",   // ← كان 5rem
+        paddingBottom: "calc(5rem + env(safe-area-inset-bottom))",
       }}
       aria-label="Hero section"
     >
@@ -259,15 +259,8 @@ export default function Hero() {
         style={{ position: "relative", zIndex: 10 }}
       >
         {/* Badge */}
-        <motion.div variants={itemVariants} className="mb-5 sm:mb-8">
+        <motion.div variants={itemVariants} className="mb-3 sm:mb-8"> {/* ← كان mb-5 */}
           <span className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-gray-300 text-xs sm:text-sm font-medium tracking-wide">
-            <svg
-              className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-400 fill-purple-400 flex-shrink-0"
-              viewBox="0 0 24 24"
-              aria-hidden="true"
-            >
-              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-            </svg>
             {t("line1")}
           </span>
         </motion.div>
@@ -275,10 +268,10 @@ export default function Hero() {
         {/* Heading */}
         <motion.h1
           variants={itemVariants}
-          className="text-[clamp(1.8rem,6vw,5rem)] font-extrabold leading-[1.1] mb-4 sm:mb-8 tracking-tight w-full"
+          className="text-[clamp(1.3rem,6vw,5rem)] font-extrabold leading-[1.25] mb-2 sm:mb-6 tracking-tight w-full" // ← clamp كان 1.7rem
         >
-          <span className="text-white block">{t("line2_first")}</span>
-          <span className="mt-2 sm:mt-3 bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent block">
+          <span className="text-white block pb-0.5">{t("line2_first")}</span>
+          <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-cyan-400 bg-clip-text text-transparent block pt-0.5">
             {t("line2_second")}
           </span>
         </motion.h1>
@@ -286,61 +279,23 @@ export default function Hero() {
         {/* Paragraph */}
         <motion.p
           variants={itemVariants}
-          className="text-sm sm:text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed mb-6 sm:mb-12 font-light px-1 sm:px-2"
+          className="text-sm sm:text-lg md:text-xl text-gray-400 max-w-2xl leading-relaxed mb-4 sm:mb-12 font-light px-1 sm:px-2" // ← كان mb-6
         >
           {t("line3")}
         </motion.p>
 
-        {/* Buttons */}
-        {/* <motion.div
-          variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full justify-center px-0 sm:px-2"
-        >
-          <button
-            onClick={handleStartProject}
-            onKeyDown={(e) => handleKeyDown(e, handleStartProject)}
-            className="group relative px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-sm sm:text-base transition-all hover:scale-105 hover:shadow-[0_0_30px_-5px_rgba(147,51,234,0.5)] active:scale-95 touch-manipulation hero-btn w-full sm:w-auto"
-            aria-label={t("startProjectAria")}
-          >
-            <span className="flex items-center justify-center gap-2">
-              {t("startProjectAria")}
-              <svg
-                className="w-4 h-4 transition-transform group-hover:translate-x-1 flex-shrink-0"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <line x1="5" y1="12" x2="19" y2="12" />
-                <polyline points="12 5 19 12 12 19" />
-              </svg>
-            </span>
-          </button>
-
-          <button
-            onClick={handleViewWork}
-            onKeyDown={(e) => handleKeyDown(e, handleViewWork)}
-            className="px-5 sm:px-8 py-3.5 sm:py-4 rounded-xl border border-white/10 bg-white/5 text-white font-semibold text-sm sm:text-base backdrop-blur-sm transition-all hover:bg-white/10 hover:border-white/20 hover:scale-105 active:scale-95 touch-manipulation hero-btn w-full sm:w-auto"
-            aria-label={t("viewWorkAria")}
-          >
-            {t("viewWorkAria")}
-          </button>
-        </motion.div> */}
+        {/* Buttons — commented out */}
+        {/* <motion.div ... /> */}
       </motion.div>
 
-      {/* ════════════════════════════════
-          ── Scroll Down Indicator ──
-      ════════════════════════════════ */}
+      {/* ── Scroll Down Indicator ── */}
       <motion.button
         onClick={handleScrollDown}
         onKeyDown={(e) => handleKeyDown(e, handleScrollDown)}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: prefersReducedMotion ? 0 : 1.5, duration: 0.8 }}
-        className="absolute bottom-25 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer group focus:outline-none"
+        className="absolute bottom-21 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 cursor-pointer group focus:outline-none" // ← كان bottom-25
         style={{ zIndex: 10 }}
         aria-label={t("scrollText")}
       >
@@ -351,14 +306,13 @@ export default function Hero() {
 
         {/* الماوس */}
         <div className="scroll-mouse relative w-5 h-8 sm:w-6 sm:h-9 rounded-full border-2 border-white/20 group-hover:border-white/40 transition-colors flex justify-center">
-          {/* الخط المتحرك داخل الماوس */}
           <div
             className="scroll-line absolute w-[2px] bg-gradient-to-b from-purple-400 to-transparent rounded-full"
             style={{ top: "4px" }}
           />
         </div>
 
-        {/* السهم المتحرك */}
+        {/* السهم */}
         <motion.div
           animate={prefersReducedMotion ? {} : { y: [0, 5, 0] }}
           transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }}

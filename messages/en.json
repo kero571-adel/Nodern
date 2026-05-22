@@ -18,37 +18,35 @@
     "startProjectAria": "Start your project now",
     "viewWorkAria": "See our work"
   },
-
   "whyChooseUs": {
-    "title": "Why Choose Us?",
-    "line1": "Because we don’t just build websites…",
-    "line2": "we build tools that bring you clients",
-    "item1": "We understand your business before writing a single line of code ✔",
-    "item2": "We analyze competitors to make you stand out ✔",
-    "item3": "We design for conversion, not just visuals ✔",
-    "item4": "Fast, smooth experience that keeps users engaged ✔",
-    "featuresList": "Our features",
-    "item1Aria": "We understand your business before coding",
-    "item2Aria": "We analyze competitors",
-    "item3Aria": "Design focused on conversion",
-    "item4Aria": "Speed and high performance",
-    "processDescription": "Process description",
+    "title": "Most websites look good...",
+    "subtitle": "but visitors still leave without taking action",
 
-    "impression": "90% of decisions start from the first impression…",
-    "guarantee": "we make sure it works in your favor",
+    "intro1": "And that's why many businesses lose clients...",
+    "intro2": "not because of their service — but because of the experience",
 
-    "description": {
-      "line 1": "Because we don’t just build websites…",
-      "line 2": "we build tools that bring you clients",
-      "line 3": "✔ We understand your business before writing a single line of code",
-      "line 4": "✔ We analyze competitors to make you stand out",
-      "line 5": "✔ We design for conversion, not just visuals",
-      "line 6": "✔ Fast, smooth experience that keeps users engaged",
-      "line 7": "90% of decisions start from the first impression…",
-      "line 8": "we make sure it works in your favor"
-    }
+    "cards": {
+      "card1": {
+        "title": "People need to understand you fast",
+        "text": "If visitors need to think too much... they leave"
+      },
+      "card2": {
+        "title": "Looks alone don’t convert",
+        "text": "Your website should guide visitors to take action"
+      },
+      "card3": {
+        "title": "Every second matters",
+        "text": "Slow or cluttered experiences reduce trust instantly"
+      },
+      "card4": {
+        "title": "That’s why we work differently",
+        "text": "We focus on the result before the visuals"
+      }
+    },
+
+    "ending1": "We don’t just build websites...",
+    "ending2": "we build experiences people continue using"
   },
-
   "projects": {
     "subtitle": "Not just work... These are results",
     "title": "Featured Work",
@@ -64,9 +62,17 @@
   "feedback": {
     "title": "Client Feedback",
     "subtitle": "We don't just say we're good... see what our clients say",
-    "quote1": "The website made a huge difference in our business",
-    "quote2": "We started receiving more clients",
-    "quote3": "The experience became much easier",
+
+    "quote1": "The website completely changed how we get clients. We now reach people much faster.",
+    "quote2": "After launching the site, our customer inquiries increased noticeably.",
+    "quote3": "The experience became much smoother and clients understand our service instantly.",
+
+    "quote4": "The website made our brand look much more professional and trustworthy.",
+    "quote5": "The biggest impact was turning visitors into real paying clients.",
+    "quote6": "People now trust us from the very first visit to our website.",
+
+    "videoNote": "Client video testimonial available on request",
+
     "slideIndicator": "Slide indicators",
     "slide": "Slide",
     "of": "of"
@@ -106,17 +112,22 @@
   },
 
   "contact": {
-    "title": "Contact Us",
-    "line1": "Since you made it here...",
-    "line2": "You really want to start the right way",
-    "line3": "And you don't just want any website... You want something that stands out",
-    "line4": "Let us help you achieve that",
-    "line5": "Contact us and take the first step",
-    "button": "Get in touch",
+    "title": "Let’s Build Your Project",
+    "line1": "If you reached here...",
+    "line2": "You’re probably ready to take a serious step",
+    "line3": "Not just a website...",
+    "line4": "But a system that actually converts visitors",
+    "line5": "Send us a message and let’s turn your idea into reality",
+
+    "button": "Start Your Project",
     "namePlaceholder": "Your Name",
     "emailPlaceholder": "Your Email",
     "messagePlaceholder": "Tell us about your project...",
-    "sending": "Sending..."
+    "sending": "Sending...",
+    "contactSuccess": {
+      "title": "Message Sent",
+      "subtitle": "We will contact you very soon."
+    }
   },
 
   "footer": {
@@ -132,7 +143,7 @@
   },
   "FeaturedWork": {
     "title": "Featured Work",
-    "description": "A selection of our recent digital products. Built for performance, designed to convert.",
+    "description": "Not just beautiful websites — every project here is designed to help businesses convert more customers.",
     "viewProject": "View Project",
     "viewAll": "View All Projects",
     "projectsList": "Projects list",
@@ -142,68 +153,73 @@
 
     "eliteeats": {
       "problemLabel": "Problem:",
-      "problem": "Restaurant owners struggled with customers constantly asking about the menu and couldn't respond quickly.",
+      "problem": "Restaurant owners struggled with repeated customer questions and delayed ordering experience.",
       "solutionLabel": "Solution:",
-      "solution": "We built a digital menu web app where customers browse meals and order directly via WhatsApp, streamlining the process.",
+      "solution": "We created a fast digital menu with direct WhatsApp ordering to simplify the process.",
       "features": {
-        "feature1": "Dark UI Design",
-        "feature2": "Smart Cart System",
-        "feature3": "WhatsApp Direct Order"
+        "feature1": "Interactive Menu",
+        "feature2": "Direct Ordering",
+        "feature3": "Fast Experience"
       }
     },
+
     "pharmacy": {
       "problemLabel": "Problem:",
-      "problem": "Pharmacies needed a professional online presence to build trust and make services accessible.",
+      "problem": "Pharmacies needed a professional online presence that builds trust and improves accessibility.",
       "solutionLabel": "Solution:",
-      "solution": "A modern landing page optimized for conversions with fast loading, SEO, and smooth UX across devices.",
+      "solution": "We designed a modern landing page focused on trust, speed, and easy access to information.",
       "features": {
-        "feature1": "Responsive Design",
-        "feature2": "SEO Optimized",
-        "feature3": "Framer Motion"
-      }
-    },
-    "portfolio": {
-      "problemLabel": "Problem:",
-      "problem": "Professionals needed a standout way to showcase skills and attract clients.",
-      "solutionLabel": "Solution:",
-      "solution": "A sleek portfolio built with Next.js 14, featuring smooth animations, interactive sections, and contact form.",
-      "features": {
-        "feature1": "Next.js 14",
-        "feature2": "Interactive Animations",
+        "feature1": "Professional Design",
+        "feature2": "Fast Performance",
         "feature3": "Fully Responsive"
       }
     },
-    "titan": {
+
+    "portfolio": {
       "problemLabel": "Problem:",
-      "problem": "Gym owners needed a centralized platform to manage memberships, trainers, and subscriptions.",
+      "problem": "Freelancers and professionals needed a better way to showcase their work and attract clients.",
       "solutionLabel": "Solution:",
-      "solution": "A comprehensive gym platform with user auth, trainer profiles, flexible subscriptions, and SEO optimization.",
+      "solution": "We built a modern portfolio that highlights personal branding and services clearly.",
       "features": {
-        "feature1": "User Management",
-        "feature2": "Subscription Plans",
-        "feature3": "Trainer System"
+        "feature1": "Modern UI",
+        "feature2": "Smooth Animations",
+        "feature3": "Clean Experience"
       }
     },
+
+    "titan": {
+      "problemLabel": "Problem:",
+      "problem": "Gyms needed a platform that presents memberships and services professionally.",
+      "solutionLabel": "Solution:",
+      "solution": "We created a modern gym platform focused on showcasing trainers and increasing subscriptions.",
+      "features": {
+        "feature1": "Membership Plans",
+        "feature2": "Trainer Showcase",
+        "feature3": "Fitness UI"
+      }
+    },
+
     "restaurant": {
       "problemLabel": "Problem:",
-      "problem": "Restaurants needed an online ordering system that converts visitors without complexity.",
+      "problem": "Restaurants needed a smoother ordering experience that increases conversions.",
       "solutionLabel": "Solution:",
-      "solution": "A fast restaurant app with smart cart, instant quantity updates, and auto-save for seamless ordering.",
+      "solution": "We built a fast restaurant app with a smart cart and seamless ordering flow.",
       "features": {
         "feature1": "Smart Cart",
         "feature2": "Fast Performance",
-        "feature3": "SEO Ready"
+        "feature3": "Smooth Ordering"
       }
     },
+
     "coza": {
       "problemLabel": "Problem:",
-      "problem": "E-commerce businesses needed a store with smooth shopping experience that converts visitors.",
+      "problem": "E-commerce stores needed a shopping experience that encourages customers to complete purchases.",
       "solutionLabel": "Solution:",
-      "solution": "A professional store with organized products, smart cart with auto-pricing, wishlist, and advanced filtering.",
+      "solution": "We created a professional store with smart filtering, wishlist, and optimized checkout experience.",
       "features": {
-        "feature1": "Smart Cart",
+        "feature1": "Smart Filtering",
         "feature2": "Wishlist System",
-        "feature3": "Advanced Filtering"
+        "feature3": "Easy Shopping"
       }
     }
   }
