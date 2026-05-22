@@ -61,15 +61,20 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="relative min-h-screen bg-black text-white py-24 px-6 overflow-hidden">
+    <section
+      id="contact"
+      className="relative min-h-screen bg-black text-white py-24 px-6 overflow-hidden"
+    >
       {/* Glow */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/20 blur-[140px] rounded-full" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/20 blur-[140px] rounded-full" />
-
-      <div className="text-center lg:text-left max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 relative z-10">
+      <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-16 relative z-10">
         {/* LEFT */}
         <div>
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">{t("title")}</h2>
+          <div className="flex justify-center lg:justify-start mb-6">
+            <h2 className="text-4xl md:text-6xl font-bold pb-3 relative inline-block">
+              {t("title")}
+              <div className="mt-6 absolute bottom-[-5px] left-0 right-0 h-1 bg-gradient-to-r from-blue-400 via-blue-500 to-purple-600 rounded-full lg:hidden"></div>
+            </h2>
+          </div>
           <div className="space-y-3 text-gray-400">
             {[t("line1"), t("line2"), t("line3"), t("line5")].map((line, i) => (
               <p
@@ -125,12 +130,16 @@ export default function Contact() {
 
             {/* NAME */}
             <div>
-              <label className="text-sm text-gray-400 flex items-center gap-2">
+              <label
+                htmlFor="contact-name"
+                className="text-sm text-gray-400 flex items-center gap-2"
+              >
                 <HiOutlineUser /> {t("namePlaceholder")}
               </label>
               <input
                 type="text"
                 name="name"
+                id="contact-name"
                 className="w-full mt-2 p-4 rounded-xl bg-white/5 border border-white/10"
                 required
               />
@@ -138,12 +147,16 @@ export default function Contact() {
 
             {/* EMAIL */}
             <div>
-              <label className="text-sm text-gray-400 flex items-center gap-2">
+              <label
+                htmlFor="contact-email"
+                className="text-sm text-gray-400 flex items-center gap-2"
+              >
                 <HiOutlineEnvelope /> {t("emailPlaceholder")}
               </label>
               <input
                 type="email"
                 name="email"
+                id="contact-email"
                 className="w-full mt-2 p-4 rounded-xl bg-white/5 border border-white/10"
                 required
               />
@@ -152,12 +165,16 @@ export default function Contact() {
 
             {/* PHONE (NEW) */}
             <div>
-              <label className="text-sm text-gray-400 flex items-center gap-2">
+              <label
+                htmlFor="contact-phone"
+                className="text-sm text-gray-400 flex items-center gap-2"
+              >
                 <HiOutlinePhone /> Phone Number
               </label>
               <input
                 type="tel"
                 name="phone"
+                id="contact-phone"
                 className="w-full mt-2 p-4 rounded-xl bg-white/5 border border-white/10"
                 placeholder="+20 1XXXXXXXXX"
                 required
@@ -166,12 +183,16 @@ export default function Contact() {
 
             {/* MESSAGE */}
             <div>
-              <label className="text-sm text-gray-400 flex items-center gap-2">
+              <label
+                htmlFor="contact-message"
+                className="text-sm text-gray-400 flex items-center gap-2"
+              >
                 <HiOutlineChatBubbleLeftRight /> {t("messagePlaceholder")}
               </label>
               <textarea
                 name="message"
                 rows="5"
+                id="contact-message"
                 className="w-full mt-2 p-4 rounded-xl bg-white/5 border border-white/10"
                 required
               />

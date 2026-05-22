@@ -122,9 +122,9 @@ export default function Timeline() {
                   </div>
 
                   {/* Step Title */}
-                  <h4 className="text-base sm:text-lg md:text-xl font-bold text-white mb-2 transition-colors group-hover:text-blue-400 px-2">
+                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-2 transition-colors group-hover:text-blue-400 px-2">
                     {t(step.key)}
-                  </h4>
+                  </h3>
 
                   {/* Optional: Step description for screen readers */}
                   <span className="sr-only">

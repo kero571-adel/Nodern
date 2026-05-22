@@ -200,8 +200,10 @@ export default function FeedBack() {
               key={index}
               custom={index}
               variants={slideVariants}
+              id={`slide-${index}`}
               initial="hidden"
               animate="visible"
+              role="tabpanel"
               exit="exit"
               className="absolute inset-0 flex flex-col items-center justify-center px-4"
             >
@@ -252,11 +254,13 @@ export default function FeedBack() {
                 aria-selected={i === index}
                 aria-controls={`slide-${i}`}
                 id={`tab-${i}`}
-                className={`h-1.5 rounded-full transition-all duration-300 min-w-[8px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50 ${
-                  i === index
-                    ? "w-6 sm:w-8 bg-blue-600"
-                    : "w-1.5 sm:w-2 bg-white/20"
-                }`}
+                className={`relative h-1.5 rounded-full transition-all duration-300 touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50
+                  before:absolute before:inset-[-12px] before:content-['']
+                  ${
+                    i === index
+                      ? "w-6 sm:w-8 bg-blue-600"
+                      : "w-1.5 sm:w-2 bg-white/20"
+                  }`}
                 aria-label={
                   locale === "ar"
                     ? `اذهب إلى الاقتباس ${i + 1}`

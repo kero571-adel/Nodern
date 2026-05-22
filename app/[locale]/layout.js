@@ -14,7 +14,7 @@ const cairo = Cairo({
 });
 
 // ─── Replace with your real domain ───────────────────────────────────────────
-const SITE_URL = "https://nodern.agency";
+const SITE_URL = "https://nodern-web.vercel.app";
 
 // ─── Per-locale metadata ─────────────────────────────────────────────────────
 const META = {
@@ -51,7 +51,7 @@ export async function generateMetadata({ params }) {
     metadataBase: new URL(SITE_URL),
     title: {
       default: m.title,
-      template: `%s | Nodern`,           // page-level titles become "Page | Nodern"
+      template: `%s | Nodern`, // page-level titles become "Page | Nodern"
     },
     description: m.description,
     keywords: m.keywords,
@@ -67,6 +67,9 @@ export async function generateMetadata({ params }) {
         routing.locales.map((l) => [l, `${SITE_URL}/${l}`])
       ),
     },
+    other: {
+      "link-preload-style": "preload",
+    },
 
     // ── Open Graph ────────────────────────────────────────────────────────────
     openGraph: {
@@ -79,7 +82,7 @@ export async function generateMetadata({ params }) {
       alternateLocale: locale === "ar" ? "en_US" : "ar_EG",
       images: [
         {
-          url: "/og-image.png",          // ← put a 1200×630 image in /public
+          url: "/og-image.png", // ← put a 1200×630 image in /public
           width: 1200,
           height: 630,
           alt: m.ogTitle,
@@ -159,7 +162,9 @@ export default async function RootLayout({ children, params }) {
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded focus:font-semibold"
           >
-            {locale === "ar" ? "تخطي إلى المحتوى الرئيسي" : "Skip to main content"}
+            {locale === "ar"
+              ? "تخطي إلى المحتوى الرئيسي"
+              : "Skip to main content"}
           </a>
           <Navbar />
           {children}

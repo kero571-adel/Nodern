@@ -1,7 +1,7 @@
 // app/sitemap.js
 // Next.js App Router generates /sitemap.xml automatically from this file.
 
-const SITE_URL = "https://nodern-web.vercel.app/ar"; // ← replace with your real domain
+const SITE_URL = "https://nodern-web.vercel.app"; // ← replace with your real domain
 const LOCALES = ["en", "ar"];
 
 // Define all your routes here — add new pages as you build them

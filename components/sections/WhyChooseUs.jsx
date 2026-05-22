@@ -59,6 +59,32 @@ export default function WhyChooseUs() {
       }}
       aria-labelledby="why-choose-us-heading"
     >
+      {/* Title */}
+      <motion.h2
+        id="why-choose-us-heading"
+        className="text-center mb-5 text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"
+        variants={headingVariant}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
+        <motion.span
+          style={{
+            display: "inline-block",
+            backgroundImage:
+              "linear-gradient(90deg, #5d00ffff, rgba(208, 8, 235, 1), #fff)",
+            backgroundClip: "text",
+            WebkitBackgroundClip: "text",
+            color: "transparent",
+            backgroundSize: "200% 200%",
+            backgroundPosition: "0% 50%",
+          }}
+          animate={gradientAnimation}
+          transition={gradientTransition}
+        >
+          {t("title")}
+        </motion.span>
+      </motion.h2>
       <div className="container w-full sm:w-11/12 mx-auto">
         <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start lg:items-center">
           {/* ── Left Content ── */}
@@ -69,33 +95,6 @@ export default function WhyChooseUs() {
             transition={{ duration: prefersReducedMotion ? 0.3 : 0.8 }}
             className="space-y-5 sm:space-y-6"
           >
-            {/* Title */}
-            <motion.h2
-              id="why-choose-us-heading"
-              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight"
-              variants={headingVariant}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-            >
-              <motion.span
-                style={{
-                  display: "inline-block",
-                  backgroundImage:
-                    "linear-gradient(90deg, #5d00ffff, rgba(208, 8, 235, 1), #fff)",
-                  backgroundClip: "text",
-                  WebkitBackgroundClip: "text",
-                  color: "transparent",
-                  backgroundSize: "200% 200%",
-                  backgroundPosition: "0% 50%",
-                }}
-                animate={gradientAnimation}
-                transition={gradientTransition}
-              >
-                {t("title")}
-              </motion.span>
-            </motion.h2>
-
             <p className="text-base sm:text-xl md:text-2xl text-blue-400 font-semibold leading-relaxed">
               {t("subtitle")}
             </p>
@@ -114,6 +113,7 @@ export default function WhyChooseUs() {
                 <motion.div
                   key={card}
                   variants={itemVariant}
+                  role="listitem"
                   initial="hidden"
                   whileInView="show"
                   viewport={{ once: true }}
