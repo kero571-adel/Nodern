@@ -11,14 +11,35 @@ export default function FeedBack() {
   const isPaused = useRef(false);
 
   const quotes = [
-    { text: t("quote1"), name: locale === "ar" ? "عميل سعيد" : "Happy Client" },
+    {
+      text: t("quote1"),
+      name: locale === "ar" ? "عميل في مجال المطاعم" : "Restaurant Client",
+      video: null,
+    },
     {
       text: t("quote2"),
-      name: locale === "ar" ? "شريك نجاح" : "Success Partner",
+      name: locale === "ar" ? "صاحب مشروع ناشئ" : "Startup Owner",
+      video: null,
     },
     {
       text: t("quote3"),
       name: locale === "ar" ? "رائد أعمال" : "Entrepreneur",
+      video: null,
+    },
+    {
+      text: t("quote4"),
+      name: locale === "ar" ? "صاحب علامة تجارية" : "Brand Owner",
+      video: null,
+    },
+    {
+      text: t("quote5"),
+      name: locale === "ar" ? "عميل متجر إلكتروني" : "E-commerce Client",
+      video: null,
+    },
+    {
+      text: t("quote6"),
+      name: locale === "ar" ? "صاحب شركة خدمات" : "Service Business Owner",
+      video: null,
     },
   ];
 
@@ -57,21 +78,30 @@ export default function FeedBack() {
   }, []);
 
   // Keyboard navigation support
-  const handleKeyDown = useCallback((e) => {
-    if (e.key === "ArrowLeft" || (locale === "ar" && e.key === "ArrowRight")) {
-      e.preventDefault();
-      prev();
-    } else if (e.key === "ArrowRight" || (locale === "ar" && e.key === "ArrowLeft")) {
-      e.preventDefault();
-      next();
-    } else if (e.key === "Home") {
-      e.preventDefault();
-      goToSlide(0);
-    } else if (e.key === "End") {
-      e.preventDefault();
-      goToSlide(quotes.length - 1);
-    }
-  }, [prev, next, goToSlide, locale, quotes.length]);
+  const handleKeyDown = useCallback(
+    (e) => {
+      if (
+        e.key === "ArrowLeft" ||
+        (locale === "ar" && e.key === "ArrowRight")
+      ) {
+        e.preventDefault();
+        prev();
+      } else if (
+        e.key === "ArrowRight" ||
+        (locale === "ar" && e.key === "ArrowLeft")
+      ) {
+        e.preventDefault();
+        next();
+      } else if (e.key === "Home") {
+        e.preventDefault();
+        goToSlide(0);
+      } else if (e.key === "End") {
+        e.preventDefault();
+        goToSlide(quotes.length - 1);
+      }
+    },
+    [prev, next, goToSlide, locale, quotes.length]
+  );
 
   // Touch swipe support for mobile
   const touchStartX = useRef(0);
@@ -89,7 +119,7 @@ export default function FeedBack() {
   const handleSwipe = useCallback(() => {
     const swipeThreshold = 50;
     const diff = touchStartX.current - touchEndX.current;
-    
+
     if (Math.abs(diff) > swipeThreshold) {
       if (diff > 0) {
         // Swiped left → next
@@ -104,32 +134,32 @@ export default function FeedBack() {
   // Animation variants
   const slideVariants = {
     hidden: { opacity: 0, scale: 0.95, y: 20 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
+    visible: {
+      opacity: 1,
+      scale: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.6, ease: "easeOut" },
     },
-    exit: { 
-      opacity: 0, 
-      scale: 1.05, 
+    exit: {
+      opacity: 0,
+      scale: 1.05,
       y: -20,
-      transition: { duration: 0.4, ease: "easeIn" }
-    }
+      transition: { duration: 0.4, ease: "easeIn" },
+    },
   };
 
   return (
-    <section 
+    <section
       className="w-full min-h-[80vh] flex items-center justify-center bg-black/20 text-white relative overflow-hidden py-20 sm:py-24 px-4"
-      style={{ 
-        paddingTop: 'calc(5rem + env(safe-area-inset-top))',
-        paddingBottom: 'calc(5rem + env(safe-area-inset-bottom))'
+      style={{
+        paddingTop: "calc(5rem + env(safe-area-inset-top))",
+        paddingBottom: "calc(5rem + env(safe-area-inset-bottom))",
       }}
     >
       {/* Background decoration - unchanged */}
       <div className="absolute w-[400px] sm:w-[600px] md:w-[800px] h-[400px] sm:h-[600px] md:h-[800px] bg-blue-600/10 blur-[120px] sm:blur-[140px] md:blur-[160px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
-      <div 
+      <div
         ref={carouselRef}
         className="relative z-10 text-center max-w-4xl px-4 sm:px-6 mx-auto"
         onMouseEnter={handleMouseEnter}
@@ -160,7 +190,7 @@ export default function FeedBack() {
           {t("subtitle")}
         </motion.h2>
 
-        <div 
+        <div
           className="relative min-h-[250px] sm:min-h-[300px] flex items-center justify-center"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
@@ -175,13 +205,19 @@ export default function FeedBack() {
               exit="exit"
               className="absolute inset-0 flex flex-col items-center justify-center px-4"
             >
-              <span className="text-6xl sm:text-7xl md:text-8xl text-blue-600/20 absolute -top-8 sm:-top-10 font-serif select-none" aria-hidden="true">
+              <span
+                className="text-6xl sm:text-7xl md:text-8xl text-blue-600/20 absolute -top-8 sm:-top-10 font-serif select-none"
+                aria-hidden="true"
+              >
                 "
               </span>
               <blockquote className="text-xl sm:text-2xl md:text-4xl leading-relaxed font-medium mb-6 sm:mb-8">
                 {quotes[index].text}
               </blockquote>
-              <div className="w-12 h-1 bg-blue-600 mb-4 sm:mb-6 rounded-full" aria-hidden="true" />
+              <div
+                className="w-12 h-1 bg-blue-600 mb-4 sm:mb-6 rounded-full"
+                aria-hidden="true"
+              />
               <cite className="text-lg sm:text-xl font-bold text-gray-300 not-italic">
                 {quotes[index].name}
               </cite>
@@ -197,12 +233,14 @@ export default function FeedBack() {
             aria-label={locale === "ar" ? "اقتباس سابق" : "Previous quote"}
             aria-controls="testimonial-carousel"
           >
-            <span className="text-xl sm:text-2xl" aria-hidden="true">←</span>
+            <span className="text-xl sm:text-2xl" aria-hidden="true">
+              ←
+            </span>
           </button>
 
-          <div 
+          <div
             id="testimonial-carousel"
-            className="flex gap-2 sm:gap-3" 
+            className="flex gap-2 sm:gap-3"
             role="tablist"
             aria-label={t("slideIndicator")}
           >
@@ -215,9 +253,15 @@ export default function FeedBack() {
                 aria-controls={`slide-${i}`}
                 id={`tab-${i}`}
                 className={`h-1.5 rounded-full transition-all duration-300 min-w-[8px] touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50 ${
-                  i === index ? "w-6 sm:w-8 bg-blue-600" : "w-1.5 sm:w-2 bg-white/20"
+                  i === index
+                    ? "w-6 sm:w-8 bg-blue-600"
+                    : "w-1.5 sm:w-2 bg-white/20"
                 }`}
-                aria-label={locale === "ar" ? `اذهب إلى الاقتباس ${i + 1}` : `Go to slide ${i + 1}`}
+                aria-label={
+                  locale === "ar"
+                    ? `اذهب إلى الاقتباس ${i + 1}`
+                    : `Go to slide ${i + 1}`
+                }
               />
             ))}
           </div>
@@ -228,13 +272,16 @@ export default function FeedBack() {
             aria-label={locale === "ar" ? "اقتباس التالي" : "Next quote"}
             aria-controls="testimonial-carousel"
           >
-            <span className="text-xl sm:text-2xl" aria-hidden="true">→</span>
+            <span className="text-xl sm:text-2xl" aria-hidden="true">
+              →
+            </span>
           </button>
         </div>
 
         {/* Live region for screen readers */}
         <div className="sr-only" aria-live="polite" aria-atomic="true">
-          {t("slide")} {index + 1} {t("of")} {quotes.length}: {quotes[index].text}
+          {t("slide")} {index + 1} {t("of")} {quotes.length}:{" "}
+          {quotes[index].text}
         </div>
       </div>
     </section>

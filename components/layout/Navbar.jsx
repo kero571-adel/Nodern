@@ -32,7 +32,7 @@ export default function Navbar() {
     if (isMobileOpen) {
       lastFocusedElement.current = document.activeElement;
       document.body.style.overflow = "hidden";
-      
+
       // Focus first interactive element in mobile menu
       setTimeout(() => {
         const firstFocusable = mobileMenuRef.current?.querySelector(
@@ -50,10 +50,10 @@ export default function Navbar() {
           'a[href], button, [tabindex]:not([tabindex="-1"])'
         );
         if (!focusableElements || focusableElements.length === 0) return;
-        
+
         const first = focusableElements[0];
         const last = focusableElements[focusableElements.length - 1];
-        
+
         if (e.shiftKey && document.activeElement === first) {
           e.preventDefault();
           last.focus();
@@ -96,11 +96,12 @@ export default function Navbar() {
       if (element) {
         const headerOffset = 80;
         const elementPosition = element.getBoundingClientRect().top;
-        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+        const offsetPosition =
+          elementPosition + window.pageYOffset - headerOffset;
 
         window.scrollTo({
           top: offsetPosition,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }
       setIsMobileOpen(false);
@@ -108,7 +109,6 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: "#services", label: t("services") },
     { href: "#projects", label: t("work") },
     { href: "#about", label: t("whyChooseUs") },
     { href: "#contact", label: t("contact") },
@@ -139,7 +139,7 @@ export default function Navbar() {
             ? "bg-black/80 backdrop-blur-md border-b border-gray-800/50 py-3"
             : "bg-transparent py-4"
         }`}
-        style={{ paddingTop: 'env(safe-area-inset-top)' }}
+        style={{ paddingTop: "env(safe-area-inset-top)" }}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -203,16 +203,19 @@ export default function Navbar() {
           id="mobile-menu"
           ref={mobileMenuRef}
           className={`fixed top-0 right-0 h-[100dvh] w-4/5 sm:w-80 max-w-xs bg-black/95 backdrop-blur-xl border-l border-gray-800 z-50 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col`}
-          style={{ 
-            transform: isMobileOpen ? 'translateX(0)' : 'translateX(100%)',
-            paddingBottom: 'env(safe-area-inset-bottom)'
+          style={{
+            transform: isMobileOpen ? "translateX(0)" : "translateX(100%)",
+            paddingBottom: "env(safe-area-inset-bottom)",
           }}
           role="dialog"
           aria-modal="true"
           aria-label="Mobile navigation"
         >
           {/* Header */}
-          <div className="flex items-center justify-between p-4 border-b border-gray-800" style={{ paddingTop: 'calc(1rem + env(safe-area-inset-top))' }}>
+          <div
+            className="flex items-center justify-between p-4 border-b border-gray-800"
+            style={{ paddingTop: "calc(1rem + env(safe-area-inset-top))" }}
+          >
             <Link
               href="/"
               onClick={(e) => {
