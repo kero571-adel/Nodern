@@ -250,17 +250,17 @@ export default function Hero() {
         }}
       />
 
-      {/* ── المحتوى ── */}
+      {/* ── content ── */}
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="container max-w-4xl mx-auto flex flex-col items-center px-2 w-full"
+        className="container  mx-auto flex flex-col items-center px-2 w-full"
         style={{ position: "relative", zIndex: 10 }}
       >
         {/* Badge */}
         <motion.div variants={itemVariants} className="mb-3 sm:mb-8"> {/* ← كان mb-5 */}
-          <span className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-gray-300 text-xs sm:text-sm font-medium tracking-wide">
+          <span className="inline-flex items-center gap-2 px-3 sm:px-5 py-2 sm:py-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md text-gray-300 lg:text-[20px] sm:text-[15px] font-medium tracking-wide">
             {t("line1")}
           </span>
         </motion.div>
