@@ -126,8 +126,7 @@ export async function generateMetadata({ params }) {
 
     // ── Verification (add your real tokens) ───────────────────────────────────
     verification: {
-      // google: "YOUR_GOOGLE_SEARCH_CONSOLE_TOKEN",
-      // yandex: "YOUR_YANDEX_TOKEN",
+      google: "_W9HjXFXmsB2cH8vYbNUvbqm1ukNJXcBxEx4FcK9uTc",
     },
   };
 }
