@@ -7,10 +7,5 @@ export default function sitemap() {
     lastModified: new Date(),
     changeFrequency: "weekly",
     priority: 1,
-    alternates: {
-      languages: Object.fromEntries(
-        LOCALES.map((l) => [l, `${SITE_URL}/${l}`])
-      ),
-    },
   }));
 }
