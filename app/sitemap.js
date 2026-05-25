@@ -1,11 +1,18 @@
-const SITE_URL = "https://nodern-web.vercel.app";
-const LOCALES = ["en", "ar"];
-
 export default function sitemap() {
-  return LOCALES.map((locale) => ({
-    url: `${SITE_URL}/${locale}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly",
-    priority: 1,
-  }));
+  const SITE_URL = "https://nodern-web.vercel.app";
+
+  return [
+    {
+      url: SITE_URL,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 1,
+      alternates: {
+        languages: {
+          ar: SITE_URL,
+          en: `${SITE_URL}/en`,
+        },
+      },
+    },
+  ];
 }

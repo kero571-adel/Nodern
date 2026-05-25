@@ -8,7 +8,7 @@ import { Cairo } from "next/font/google";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
-  weight: ["400", "600", "700"], 
+  weight: ["400", "600", "700"],
   variable: "--font-cairo",
   display: "swap",
 });
@@ -44,7 +44,7 @@ const META = {
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const m = META[locale] ?? META.en;
-  const canonicalUrl = `${SITE_URL}/${locale}`;
+  const canonicalUrl = locale === "en" ? SITE_URL : `${SITE_URL}/${locale}`;
 
   return {
     // ── Core ──────────────────────────────────────────────────────────────────
