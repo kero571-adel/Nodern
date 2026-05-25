@@ -1,7 +1,4 @@
-// app/robots.js
-// Next.js App Router generates /robots.txt automatically from this file.
-
-const SITE_URL = "https://nodern-web.vercel.app"; // ← replace with your real domain
+const SITE_URL = "https://nodern-web.vercel.app";
 
 export default function robots() {
   return {
@@ -9,7 +6,7 @@ export default function robots() {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/_next/", "/admin/"],
+        disallow: ["/api/", "/admin/"],
       },
     ],
     sitemap: `${SITE_URL}/sitemap.xml`,
