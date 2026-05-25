@@ -39,6 +39,11 @@ const META = {
       "مش مجرد مواقع حلوة. تجارب رقمية تخلي الناس تفهمك وتثق فيك وتتواصل معاك.",
   },
 };
+export const metadata = {
+  verification: {
+    google: "_W9HjXFXmsB2cH8vYbNUvbqm1ukNJXcBxEx4FcK9uTc",
+  },
+};
 
 // ─── generateMetadata ─────────────────────────────────────────────────────────
 export async function generateMetadata({ params }) {
