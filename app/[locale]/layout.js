@@ -11,6 +11,7 @@ const cairo = Cairo({
   weight: ["400", "600", "700"],
   variable: "--font-cairo",
   display: "swap",
+  preload: true,
 });
 
 // ─── Replace with your real domain ───────────────────────────────────────────
@@ -44,7 +45,7 @@ const META = {
 export async function generateMetadata({ params }) {
   const { locale } = await params;
   const m = META[locale] ?? META.en;
-  const canonicalUrl = locale === "en" ? SITE_URL : `${SITE_URL}/${locale}`;
+  const canonicalUrl = `${SITE_URL}/${locale}`;
 
   return {
     // ── Core ──────────────────────────────────────────────────────────────────

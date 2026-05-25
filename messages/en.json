@@ -19,10 +19,10 @@
     "viewWorkAria": "See our work"
   },
   "whyChooseUs": {
-    "title": "Most websites look good...",
+    "title": "Most websites look good",
     "subtitle": "but visitors still leave without taking action",
 
-    "intro1": "And that's why many businesses lose clients...",
+    "intro1": "And that's why many businesses lose clients",
     "intro2": "not because of their service — but because of the experience",
 
     "cards": {
@@ -44,7 +44,7 @@
       }
     },
 
-    "ending1": "We don’t just build websites...",
+    "ending1": "We don’t just build websites",
     "ending2": "we build experiences people continue using"
   },
   "projects": {
@@ -113,16 +113,16 @@
 
   "contact": {
     "title": "Let’s Build Your Project",
-    "line1": "If you reached here...",
+    "line1": "If you reached here",
     "line2": "You’re probably ready to take a serious step",
-    "line3": "Not just a website...",
+    "line3": "Not just a website",
     "line4": "But a system that actually converts visitors",
     "line5": "Send us a message and let’s turn your idea into reality",
 
     "button": "Start Your Project",
     "namePlaceholder": "Your Name",
     "emailPlaceholder": "Your Email",
-    "messagePlaceholder": "Tell us about your project...",
+    "messagePlaceholder": "Tell us about your project",
     "sending": "Sending...",
     "contactSuccess": {
       "title": "Message Sent",

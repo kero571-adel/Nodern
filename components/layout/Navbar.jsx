@@ -109,8 +109,8 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { href: "#projects", label: t("work") },
     { href: "#about", label: t("whyChooseUs") },
+    { href: "#projects", label: t("work") },
     { href: "#contact", label: t("contact") },
   ];
 

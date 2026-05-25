@@ -9,10 +9,10 @@ export default function sitemap() {
       priority: 1,
       alternates: {
         languages: {
-          ar: SITE_URL,
+          ar: `${SITE_URL}/ar`,
           en: `${SITE_URL}/en`,
         },
-      },
+      }
     },
   ];
 }
