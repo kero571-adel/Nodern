@@ -33,7 +33,7 @@ export default function HeroScrollButton({ text }) {
       <div className="scroll-mouse relative w-5 h-8 sm:w-6 sm:h-9 rounded-full border-2 border-white/20 group-hover:border-white/40 transition-colors flex justify-center">
         <div
           className="scroll-line absolute w-[2px] bg-gradient-to-b from-purple-400 to-transparent rounded-full"
-          style={{ top: "4px" }}
+          style={{ top: "4px", transformOrigin: "top" }}
         />
       </div>
 

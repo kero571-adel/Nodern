@@ -49,18 +49,9 @@ export default function Hero() {
         }
 
         @keyframes scrollLine {
-          0% {
-            height: 0;
-            opacity: 1;
-            top: 0;
-          }
-
-          100% {
-            height: 20px;
-            opacity: 0;
-            top: 20px;
-          }
-        }
+  0%   { transform: scaleY(0) translateY(0); opacity: 1; }
+  100% { transform: scaleY(1) translateY(10px); opacity: 0; }
+}
 
         .hero-fade {
           opacity: 0;

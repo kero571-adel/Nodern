@@ -1,21 +1,22 @@
-import { useLocale } from "next-intl";
-import NetworkBackground from "@/components/NetworkBackground";
+// app/[locale]/page.js
+import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero/page";
-import WhyChooseUs from "@/components/sections/WhyChooseUs";
-import Projects from "@/components/sections/Projects";
-import FeedBack from "@/components/sections/FeedBack";
-import Timeline from "@/components/sections/Timeline";
-import Contact from "@/components/sections/Contact";
 import JsonLd from "@/components/JsonLd";
-//import ClientSplash from "@/components/splash/ClientSplash";
+import { useLocale } from "next-intl";
+
+// Lazy load everything below the fold
+import NetworkBackground from "@/components/NetworkBackground";
+const WhyChooseUs = dynamic(() => import("@/components/sections/WhyChooseUs"));
+const Projects = dynamic(() => import("@/components/sections/Projects"));
+const FeedBack = dynamic(() => import("@/components/sections/FeedBack"));
+const Timeline = dynamic(() => import("@/components/sections/Timeline"));
+const Contact = dynamic(() => import("@/components/sections/Contact"));
 
 export default function Home() {
   const locale = useLocale();
-
   return (
     <>
       <JsonLd locale={locale} />
-      {/* <ClientSplash /> */}
       <NetworkBackground />
       <main id="main-content" className="relative text-white">
         <Hero />

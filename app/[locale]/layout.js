@@ -8,9 +8,9 @@ import { Cairo } from "next/font/google";
 
 const cairo = Cairo({
   subsets: ["arabic", "latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "600", "700"], 
   variable: "--font-cairo",
-  display: "swap", // ✅ Prevents FOUT — improves CLS score
+  display: "swap",
 });
 
 // ─── Replace with your real domain ───────────────────────────────────────────
@@ -147,16 +147,8 @@ export default async function RootLayout({ children, params }) {
       dir={locale === "ar" ? "rtl" : "ltr"}
       className={cairo.variable}
     >
-      {/*
-       * ✅ viewport meta is handled automatically by Next.js App Router.
-       * ✅ charset is also injected automatically — no need to add them.
-       */}
       <body className={cairo.className}>
         <NextIntlClientProvider messages={messages}>
-          {/*
-           * ✅ Skip-nav link for keyboard & screen-reader users.
-           * The matching <main id="main-content"> is in page.js.
-           */}
           <a
             href="#main-content"
             className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-white focus:text-black focus:rounded focus:font-semibold"
