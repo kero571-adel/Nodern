@@ -107,7 +107,7 @@ export default function Hero() {
         style={{
           zIndex: 2,
           bottom: "-5%",
-          left: "-8%",
+          left: "0%",
           width: "clamp(180px, 30vw, 380px)",
           height: "90%",
           background:
@@ -162,7 +162,7 @@ export default function Hero() {
         style={{
           zIndex: 2,
           bottom: "-5%",
-          right: "-8%",
+          right: "0%",
           width: "clamp(180px, 30vw, 380px)",
           height: "90%",
           background:

@@ -1,7 +1,7 @@
 'use client';
-import {useLocale} from 'next-intl';
-import {useRouter, usePathname} from 'next/navigation';
-
+import { useLocale } from 'next-intl';
+import { useRouter, usePathname } from '@/i18n/navigation'; // ← غيّر الـ import هنا فقط
+ 
 export default function LanguageSwitcher() {
   const locale = useLocale();
   const router = useRouter();
@@ -9,14 +9,13 @@ export default function LanguageSwitcher() {
 
   const toggleLocale = () => {
     const nextLocale = locale === 'en' ? 'ar' : 'en';
-    const newPath = pathname.replace(`/${locale}`, `/${nextLocale}`);
-    router.push(newPath);
+    router.replace(pathname, { locale: nextLocale }); // ← وغيّر السطر ده
   };
 
   return (
     <button
       onClick={toggleLocale}
-      className=" z-50 border cursor-pointer border-white/20 bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm hover:border-purple-500 hover:bg-purple-500/20 transition-all duration-300"
+      className="z-50 border cursor-pointer border-white/20 bg-black/50 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm hover:border-purple-500 hover:bg-purple-500/20 transition-all duration-300"
     >
       {locale === 'en' ? 'عربي' : 'EN'}
     </button>
