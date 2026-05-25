@@ -82,7 +82,7 @@ export async function generateMetadata({ params }) {
       alternateLocale: locale === "ar" ? "en_US" : "ar_EG",
       images: [
         {
-          url: "/og-image.png", // ← put a 1200×630 image in /public
+          url: "logo.png",
           width: 1200,
           height: 630,
           alt: m.ogTitle,
@@ -102,9 +102,9 @@ export async function generateMetadata({ params }) {
     // ── Icons ─────────────────────────────────────────────────────────────────
     icons: {
       icon: [
-        { url: "/favicon.ico" },
-        { url: "/icon-192.png", sizes: "192x192", type: "image/png" },
-        { url: "/icon-512.png", sizes: "512x512", type: "image/png" },
+        { url: "/logo.png", sizes: "192x192", type: "image/png" },
+        { url: "/logo.png", sizes: "192x192", type: "image/png" },
+        { url: "/logo.png", sizes: "512x512", type: "image/png" },
       ],
       apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
     },
