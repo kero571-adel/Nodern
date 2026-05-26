@@ -16,65 +16,92 @@ export default function FeaturedWork() {
       {
         id: "eliteeats",
         name: "EliteEats",
-        result: "↑ زيادة الطلبات وسهولة الطلب",
-        category: "تجربة طلب أسرع وتحويل أعلى",
+        result: t("eliteeats.result"),
+        category: t("eliteeats.category"),
         image: "/images/projects/Whisk_af05c77490d4e1c95c04484c5bd9b98edr.png",
         link: "https://smart-menu-rose.vercel.app/",
         gradient: "from-amber-500 to-orange-600",
         features: ["feature1", "feature2", "feature3"],
       },
+  
       {
         id: "pharmacy",
         name: "Pharmacy Egypt",
-        result: "↑ ثقة أعلى وسهولة وصول للخدمات",
-        category: "بناء الثقة وسهولة الوصول للخدمات",
+        result: t("pharmacy.result"),
+        category: t("pharmacy.category"),
         image: "/images/projects/Screenshot 2026-04-25 235105.png",
         link: "https://ourpharmacies.vercel.app/",
         gradient: "from-emerald-500 to-teal-600",
         features: ["feature1", "feature2", "feature3"],
       },
+  
       {
         id: "portfolio",
         name: "Professional Portfolio",
-        result: "↑ إبراز الهوية الشخصية وجذب العملاء",
-        category: "عرض احترافي للمهارات والخدمات",
+        result: t("portfolio.result"),
+        category: t("portfolio.category"),
         image: "/images/projects/Whisk_6ad9295eb4deb53b9384355230b84f79dr.png",
         link: "https://kerolesadel.vercel.app/en",
         gradient: "from-purple-500 to-pink-600",
         features: ["feature1", "feature2", "feature3"],
       },
+  
       {
         id: "titan",
         name: "Titan Fitness Club",
-        result: "↑ زيادة التفاعل والاشتراكات",
-        category: "زيادة الاشتراكات وتجربة أفضل للعملاء",
+        result: t("titan.result"),
+        category: t("titan.category"),
         image: "/images/projects/Screenshot 2026-04-25 235603.png",
         link: "https://titanfitness-gamma.vercel.app/",
         gradient: "from-red-500 to-orange-600",
         features: ["feature1", "feature2", "feature3"],
       },
+  
       {
         id: "restaurant",
         name: "CrunchyBite",
-        result: "↑ تجربة طلب أسرع وثقة أعلى",
-        category: "تجربة طلب سلسة وتحويل أعلى",
+        result: t("restaurant.result"),
+        category: t("restaurant.category"),
         image: "/images/projects/Screenshot 2026-04-25 235340.png",
         link: "https://crunchybite.vercel.app/",
         gradient: "from-rose-500 to-pink-600",
         features: ["feature1", "feature2", "feature3"],
       },
+  
       {
         id: "coza",
         name: "Coza Store",
-        result: "↑ تجربة شراء أسهل وزيادة المبيعات",
-        category: "متجر احترافي يركز على التحويل",
+        result: t("coza.result"),
+        category: t("coza.category"),
         image: "/images/projects/Screenshot 2026-04-26 000042.png",
         link: "https://willowy-llama-affd20.netlify.app/",
         gradient: "from-blue-500 to-indigo-600",
         features: ["feature1", "feature2", "feature3"],
       },
+  
+      {
+        id: "devwear",
+        name: "DevWear",
+        result: t("devwear.result"),
+        category: t("devwear.category"),
+        image: "/images/projects/a_خلى_الخلفيه_dark_قلي.webp",
+        link: "https://my-prand.vercel.app/",
+        gradient: "from-green-500 to-lime-600",
+        features: ["feature1", "feature2", "feature3"],
+      },
+  
+      {
+        id: "visionoptics",
+        name: "Vision Optics",
+        result: t("visionoptics.result"),
+        category: t("visionoptics.category"),
+        image: "/images/projects/a_Create_a_modern_futu (2).webp",
+        link: "https://opt-eyes.vercel.app/",
+        gradient: "from-cyan-500 to-teal-600",
+        features: ["feature1", "feature2", "feature3"],
+      },
     ],
-    []
+    [t]
   );
 
   // Handle hover with keyboard fallback

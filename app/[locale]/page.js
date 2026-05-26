@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import Hero from "@/components/sections/Hero/page";
 import JsonLd from "@/components/JsonLd";
 import { useLocale } from "next-intl";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 // Lazy load everything below the fold
 import NetworkBackground from "@/components/NetworkBackground";
@@ -26,6 +27,7 @@ export default function Home() {
         <Timeline />
         <Contact />
       </main>
+      <WhatsAppButton />
     </>
   );
 }

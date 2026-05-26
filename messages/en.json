@@ -31,7 +31,7 @@
         "text": "If visitors need to think too much... they leave"
       },
       "card2": {
-        "title": "Looks alone don’t convert",
+        "title": "Looks alone don't convert",
         "text": "Your website should guide visitors to take action"
       },
       "card3": {
@@ -39,12 +39,12 @@
         "text": "Slow or cluttered experiences reduce trust instantly"
       },
       "card4": {
-        "title": "That’s why we work differently",
+        "title": "That's why we work differently",
         "text": "We focus on the result before the visuals"
       }
     },
 
-    "ending1": "We don’t just build websites",
+    "ending1": "We don't just build websites",
     "ending2": "we build experiences people continue using"
   },
   "projects": {
@@ -112,12 +112,12 @@
   },
 
   "contact": {
-    "title": "Let’s Build Your Project",
+    "title": "Let's Build Your Project",
     "line1": "If you reached here",
-    "line2": "You’re probably ready to take a serious step",
+    "line2": "You're probably ready to take a serious step",
     "line3": "Not just a website",
     "line4": "But a system that actually converts visitors",
-    "line5": "Send us a message and let’s turn your idea into reality",
+    "line5": "Send us a message and let's turn your idea into reality",
 
     "button": "Start Your Project",
     "namePlaceholder": "Your Name",
@@ -141,6 +141,7 @@
     "privacyPolicy": "Privacy Policy",
     "termsOfService": "Terms of Service"
   },
+
   "FeaturedWork": {
     "title": "Featured Work",
     "description": "Not just beautiful websites — every project here is designed to help businesses convert more customers.",
@@ -152,6 +153,8 @@
     "featuresList": "Features",
 
     "eliteeats": {
+      "result": "↑ Faster ordering and higher customer satisfaction",
+      "category": "Digital menu with direct WhatsApp ordering",
       "problemLabel": "Problem:",
       "problem": "Restaurant owners struggled with repeated customer questions and delayed ordering experience.",
       "solutionLabel": "Solution:",
@@ -164,6 +167,8 @@
     },
 
     "pharmacy": {
+      "result": "↑ Professional online presence and higher trust",
+      "category": "Professional landing page for pharmacies",
       "problemLabel": "Problem:",
       "problem": "Pharmacies needed a professional online presence that builds trust and improves accessibility.",
       "solutionLabel": "Solution:",
@@ -176,6 +181,8 @@
     },
 
     "portfolio": {
+      "result": "↑ More client leads and better opportunities",
+      "category": "Professional personal portfolio",
       "problemLabel": "Problem:",
       "problem": "Freelancers and professionals needed a better way to showcase their work and attract clients.",
       "solutionLabel": "Solution:",
@@ -188,6 +195,8 @@
     },
 
     "titan": {
+      "result": "↑ More subscriptions and higher gym engagement",
+      "category": "Professional gym platform",
       "problemLabel": "Problem:",
       "problem": "Gyms needed a platform that presents memberships and services professionally.",
       "solutionLabel": "Solution:",
@@ -200,6 +209,8 @@
     },
 
     "restaurant": {
+      "result": "↑ Faster and smoother ordering experience",
+      "category": "Restaurant app with seamless ordering flow",
       "problemLabel": "Problem:",
       "problem": "Restaurants needed a smoother ordering experience that increases conversions.",
       "solutionLabel": "Solution:",
@@ -212,6 +223,8 @@
     },
 
     "coza": {
+      "result": "↑ Higher purchase completion rate",
+      "category": "Professional e-commerce store",
       "problemLabel": "Problem:",
       "problem": "E-commerce stores needed a shopping experience that encourages customers to complete purchases.",
       "solutionLabel": "Solution:",
@@ -220,6 +233,34 @@
         "feature1": "Smart Filtering",
         "feature2": "Wishlist System",
         "feature3": "Easy Shopping"
+      }
+    },
+
+    "devwear": {
+      "result": "↑ Higher engagement and longer session duration",
+      "category": "A developer-focused brand experience with better conversion",
+      "problemLabel": "Problem:",
+      "problem": "Visitors were leaving quickly without interacting or completing purchases.",
+      "solutionLabel": "Solution:",
+      "solution": "We created a fully unique experience inspired by programming environments and code interfaces.",
+      "features": {
+        "feature1": "Code-inspired UI",
+        "feature2": "Interactive experience",
+        "feature3": "Higher engagement"
+      }
+    },
+
+    "visionoptics": {
+      "result": "↑ More trust and better customer conversion",
+      "category": "A shopping experience focused on trust and product clarity",
+      "problemLabel": "Problem:",
+      "problem": "Customers didn't feel enough confidence while browsing products or understanding lens benefits.",
+      "solutionLabel": "Solution:",
+      "solution": "We designed a visual experience that explains the value of the glasses and builds trust instantly.",
+      "features": {
+        "feature1": "Trust-focused UX",
+        "feature2": "Visual product explanation",
+        "feature3": "Smoother shopping"
       }
     }
   }
