@@ -20,7 +20,7 @@ const SITE_URL = "https://nodern-web.vercel.app";
 // ─── Per-locale metadata ─────────────────────────────────────────────────────
 const META = {
   en: {
-    title: "Nodern | Professional Web Development Agency",
+    title: "Nodern | Websites That Help Businesses Grow",
     description:
       "Nodern builds high-performance websites that turn visitors into customers. We design fast, accessible, conversion-focused digital experiences for ambitious businesses.",
     keywords:
@@ -30,7 +30,7 @@ const META = {
       "Not just beautiful websites. Digital experiences that make people understand you, trust you, and contact you.",
   },
   ar: {
-    title: "نودرن | وكالة تطوير مواقع احترافية",
+    title: "نودرن | بنبنى مواقع تخلي الناس تفهم مشروعك وتثق فيه",
     description:
       "نودرن تبني مواقع عالية الأداء تحوّل الزوار إلى عملاء. نصمم تجارب رقمية سريعة وقابلة للوصول تركز على التحويل للشركات الطموحة.",
     keywords:
