@@ -78,6 +78,8 @@ export default function WhyChooseUs() {
             color: "transparent",
             backgroundSize: "200% 200%",
             backgroundPosition: "0% 50%",
+            paddingBottom: "0.2em",
+            lineHeight: "1.2",
           }}
           animate={gradientAnimation}
           transition={gradientTransition}

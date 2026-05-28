@@ -165,6 +165,19 @@
         "feature3": "Fast Experience"
       }
     },
+    "eduplatform": {
+      "result": "↑ Improved learning experience and teacher efficiency",
+      "category": "Student–Teacher communication platform",
+      "problemLabel": "Problem:",
+      "problem": "Students and teachers lacked a structured communication system.",
+      "solutionLabel": "Solution:",
+      "solution": "We built a smart platform connecting students and teachers via Teacher ID.",
+      "features": {
+        "feature1": "Group system",
+        "feature2": "Online exams",
+        "feature3": "Auto grading"
+      }
+    },
 
     "pharmacy": {
       "result": "↑ Professional online presence and higher trust",
