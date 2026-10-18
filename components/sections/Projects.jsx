@@ -286,7 +286,7 @@ export default function FeaturedWork() {
 
         {/* === Projects Grid === */}
         <div
-          className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8"
           role="list"
           aria-label={t("projectsList")}
         >
