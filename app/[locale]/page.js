@@ -4,7 +4,7 @@ import Hero from "@/components/sections/Hero/page";
 import JsonLd from "@/components/JsonLd";
 import { useLocale } from "next-intl";
 import WhatsAppButton from "@/components/WhatsAppButton";
-
+import Brands from "@/components/sections/Brands";
 // Lazy load everything below the fold
 import NetworkBackground from "@/components/NetworkBackground";
 const WhyChooseUs = dynamic(() => import("@/components/sections/WhyChooseUs"));
@@ -21,6 +21,7 @@ export default function Home() {
       <NetworkBackground />
       <main id="main-content" className="relative text-white">
         <Hero />
+        <Brands />
         <WhyChooseUs />
         <Projects />
         <FeedBack />

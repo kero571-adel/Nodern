@@ -1,0 +1,16 @@
+// [id, title, category, link, gradientIndex, hasDashboard]
+export const CLIENT_SITE_DATA = [
+  [101, "Youseef Amer", "portfolio", "https://youseefamer.vercel.app/", 0],
+  [102, "Maivelle Micheal", "portfolio", "https://maivellemicheal.vercel.app/", 1],
+  [103, "Lens Command", "media", "https://lens-command.vercel.app/", 2, true],
+  [104, "Rana Sleem", "ugc", "https://ranasleem.vercel.app/", 3],
+  [105, "Karimareda", "ugc", "https://karimareda.vercel.app/", 4],
+  [106, "Wahm", "portfolio", "https://wahm-site.vercel.app/", 5],
+  [107, "Ahmed Sherif", "portfolio", "https://ahmedsherif.vercel.app/", 0, true],
+  [108, "Abu Almaati", "portfolio", "https://abu-almaati.vercel.app/", 1],
+  [109, "HK Media", "media", "https://hkmedia.vercel.app/", 2],
+  [110, "Merna UGC", "ugc", "https://merna-ugc.vercel.app/", 3],
+  [111, "Gomaa", "portfolio", "https://gomaa-site.vercel.app/", 4],
+  [112, "Farah UGC", "ugc", "https://farah-ugc.vercel.app/", 5],
+  [113, "Sarah UGC", "ugc", "https://sarah-ugc.vercel.app/", 0],
+];

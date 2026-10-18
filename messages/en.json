@@ -18,6 +18,7 @@
     "startProjectAria": "Start your project now",
     "viewWorkAria": "See our work"
   },
+  "Brands": { "title": "Trusted by creators & brands" },
   "whyChooseUs": {
     "title": "Most websites look good",
     "subtitle": "but visitors still leave without taking action",
@@ -151,7 +152,76 @@
     "openInNewTab": "opens in new tab",
     "projectAlt": "{name} project screenshot",
     "featuresList": "Features",
-
+    "clients": {
+      "problemLabel": "Problem:",
+      "solutionLabel": "Solution:",
+      "ugc": {
+        "result": "↑ Stronger presence in front of brands",
+        "category": "UGC creator portfolio",
+        "problem": "Creators were sending their work through scattered links and messages.",
+        "solution": "We built a fast portfolio showing videos and collaborations in one link.",
+        "features": {
+          "feature1": "Video showcase",
+          "feature2": "Mobile-friendly",
+          "feature3": "One link for brands"
+        }
+      },
+      "media": {
+        "result": "↑ Better showcase and more opportunities",
+        "category": "Photo & video portfolio",
+        "problem": "Photographers needed a professional place to present their work.",
+        "solution": "We built a fast site that highlights projects visually.",
+        "features": {
+          "feature1": "Project gallery",
+          "feature2": "Fast loading",
+          "feature3": "Fully responsive"
+        }
+      },
+      "mediaDash": {
+        "result": "↑ Better showcase and more opportunities",
+        "category": "Photo & video portfolio with dashboard",
+        "problem": "Photographers needed a professional showcase they can update themselves.",
+        "solution": "We built a fast site with a dashboard to add work anytime.",
+        "features": {
+          "feature1": "Project gallery",
+          "feature2": "Fast loading",
+          "feature3": "Dashboard to add work"
+        }
+      },
+      "portfolio": {
+        "result": "↑ Professional first impression and better leads",
+        "category": "Professional personal portfolio",
+        "problem": "Freelancers needed a clear way to present their work and services.",
+        "solution": "We built a modern portfolio that highlights identity and services.",
+        "features": {
+          "feature1": "Modern UI",
+          "feature2": "Fast loading",
+          "feature3": "Fully responsive"
+        }
+      },
+      "portfolioDash": {
+        "result": "↑ Professional first impression and better leads",
+        "category": "Personal portfolio with dashboard",
+        "problem": "The client needed a portfolio they can update without a developer.",
+        "solution": "We built a fast portfolio with a dashboard to add and manage work.",
+        "features": {
+          "feature1": "Modern UI",
+          "feature2": "Fast loading",
+          "feature3": "Dashboard to add work"
+        }
+      }
+    },
+    "filters": {
+      "label": "Project categories",
+      "all": "All",
+      "ecommerce": "E-commerce",
+      "food": "Food & Restaurants",
+      "platform": "Platforms",
+      "landing": "Landing Pages",
+      "portfolio": "Portfolios",
+      "ugc": "UGC Creators",
+      "media": "Photo & Video"
+    },
     "eliteeats": {
       "result": "↑ Faster ordering and higher customer satisfaction",
       "category": "Digital menu with direct WhatsApp ordering",
