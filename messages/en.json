@@ -218,7 +218,7 @@
       "food": "Food & Restaurants",
       "platform": "Platforms",
       "landing": "Landing Pages",
-      "portfolio": "Portfolios",
+      "portfolio": "Design & editing",
       "ugc": "UGC Creators",
       "media": "Photo & Video"
     },
@@ -248,7 +248,19 @@
         "feature3": "Auto grading"
       }
     },
-
+    "drtrend": {
+      "result": "↑ Easier ordering and clearer order management",
+      "category": "Medical apparel store with an orders dashboard",
+      "problemLabel": "Problem:",
+      "problem": "A medical apparel brand needed a professional store to showcase products, take orders and track them easily.",
+      "solutionLabel": "Solution:",
+      "solution": "We built a bilingual store with cart and login, plus a dashboard to manage orders and update their status.",
+      "features": {
+        "feature1": "Bilingual store",
+        "feature2": "Cart & login",
+        "feature3": "Orders dashboard"
+      }
+    },
     "pharmacy": {
       "result": "↑ Professional online presence and higher trust",
       "category": "Professional landing page for pharmacies",

@@ -29,12 +29,7 @@ export default function Footer() {
   };
 
   const socialLinks = [
-    {
-      href: "https://www.instagram.com/nodernweb?igsh=MTh6Ym50MHNpbWIwdA==",
-      icon: <IoLogoInstagram size={24} />,
-      label: "Instagram",
-      ariaLabel: "Follow us on Instagram",
-    },
+ 
     {
       href: "https://www.tiktok.com/@nodernweb?_r=1&_t=ZS-95bLRDMbD08",
       icon: <FaTiktok size={24} />,
@@ -47,12 +42,13 @@ export default function Footer() {
       label: "Email",
       ariaLabel: "Send us an email",
     },
-    {
-      href: "https://www.facebook.com/share/1Be5EuADcb/",
-      icon: <FaFacebookF size={24} />,
-      label: "Facebook",
-      ariaLabel: "Follow us on Facebook",
+       {
+      href: "https://www.instagram.com/nodernweb?igsh=MTh6Ym50MHNpbWIwdA==",
+      icon: <IoLogoInstagram size={24} />,
+      label: "Instagram",
+      ariaLabel: "Follow us on Instagram",
     },
+   
   ];
 
   const quickLinks = [

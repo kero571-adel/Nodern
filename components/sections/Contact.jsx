@@ -14,7 +14,7 @@ import {
 export default function Contact() {
   const t = useTranslations("contact");
 
-  const whatsappNumber = "201507174664";
+  const whatsappNumber = "201272442140";
   const whatsappLink = `https://wa.me/${whatsappNumber}`;
 
   const [state, handleSubmit] = useForm("mredkbbb");

@@ -23,10 +23,10 @@ const CATEGORY_IDS = [
   "ecommerce",
   "food",
   "platform",
+  "media",
   "landing",
   "portfolio",
   "ugc",
-  "media",
 ];
 const PAGE = 8;
 
@@ -96,6 +96,18 @@ export default function FeaturedWork() {
         features: FEATURES,
       },
       {
+        id: "drtrend",
+        cat: "ecommerce",
+        name: "Dr Trend",
+        result: t("drtrend.result"),
+        category: t("drtrend.category"),
+        image: null,
+        live: true,
+        link: "https://dr-trend.vercel.app/",
+        gradient: "from-teal-500 to-emerald-600",
+        features: FEATURES,
+      },
+      {
         id: "portfolio",
         cat: "portfolio",
         name: "Professional Portfolio",
@@ -135,7 +147,7 @@ export default function FeaturedWork() {
         result: t("coza.result"),
         category: t("coza.category"),
         image: "/images/projects/coza.webp",
-        link: "https://willowy-llama-affd20.netlify.app/",
+        link: "https://store-three-ten.vercel.app/",
         gradient: "from-blue-500 to-indigo-600",
         features: FEATURES,
       },
@@ -189,7 +201,10 @@ export default function FeaturedWork() {
     () => ({
       hover: {
         y: prefersReducedMotion ? 0 : -8,
-        transition: { duration: prefersReducedMotion ? 0 : 0.5, ease: "easeOut" },
+        transition: {
+          duration: prefersReducedMotion ? 0 : 0.5,
+          ease: "easeOut",
+        },
       },
     }),
     [prefersReducedMotion],
@@ -199,7 +214,10 @@ export default function FeaturedWork() {
     () => ({
       hover: {
         scale: prefersReducedMotion ? 1 : 1.1,
-        transition: { duration: prefersReducedMotion ? 0 : 0.7, ease: "easeOut" },
+        transition: {
+          duration: prefersReducedMotion ? 0 : 0.7,
+          ease: "easeOut",
+        },
       },
     }),
     [prefersReducedMotion],
@@ -211,7 +229,10 @@ export default function FeaturedWork() {
       visible: {
         opacity: 1,
         scale: 1,
-        transition: { duration: prefersReducedMotion ? 0 : 0.5, ease: "easeOut" },
+        transition: {
+          duration: prefersReducedMotion ? 0 : 0.5,
+          ease: "easeOut",
+        },
       },
     }),
     [prefersReducedMotion],
@@ -415,9 +436,9 @@ export default function FeaturedWork() {
                     <div className="space-y-2 sm:space-y-3 mt-3 sm:mt-4">
                       <p className="text-gray-400 text-[10px] sm:text-xs leading-relaxed">
                         <span className="text-purple-400 font-medium">
-                          {t(`${labelKey}.problemLabel`)}   
+                          {t(`${labelKey}.problemLabel`)}
                         </span>{" "}
-                        {t(`${k}.problem`)} 
+                        {t(`${k}.problem`)}
                       </p>
 
                       <p className="text-gray-300 text-[10px] sm:text-xs leading-relaxed">
