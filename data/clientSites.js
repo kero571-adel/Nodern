@@ -1,4 +1,5 @@
 export const CLIENT_SITE_DATA = [
+  [114, "Izac Fayz", "portfolio", "https://izac-fayz.vercel.app/", 2, true],
   [101, "Youseef Amer", "media", "https://youseefamer.vercel.app/", 0],
   [102, "Maivelle Micheal", "portfolio", "https://maivellemicheal.vercel.app/", 1],
   [103, "Lens Command", "media", "https://lens-command.vercel.app/", 2, true],
@@ -12,4 +13,5 @@ export const CLIENT_SITE_DATA = [
   [111, "Gomaa", "portfolio", "https://gomaa-site.vercel.app/", 4],
   [112, "Farah UGC", "ugc", "https://farah-ugc.vercel.app/", 5],
   [113, "Sarah UGC", "ugc", "https://sarah-ugc.vercel.app/", 0],
+  [115, "Media Sharks", "media", "https://media-shark.vercel.app/ar", 1, true],
 ];
