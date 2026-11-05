@@ -21,12 +21,12 @@ const FEATURES = ["feature1", "feature2", "feature3"];
 const CATEGORY_IDS = [
   "all",
   "ecommerce",
+  "portfolio",
+  "media",
+  "ugc",
   "food",
   "platform",
-  "media",
   "landing",
-  "portfolio",
-  "ugc",
 ];
 const PAGE = 8;
 
@@ -82,6 +82,28 @@ export default function FeaturedWork() {
         image: "/images/projects/eliteeats.webp",
         link: "https://smart-menu-rose.vercel.app/",
         gradient: "from-amber-500 to-orange-600",
+        features: FEATURES,
+      },
+            {
+        id: "modernstore1",
+        cat: "ecommerce",
+        name: "Modern E-commerce 1",
+        result: t("modernstore1.result"),
+        category: t("modernstore1.category"),
+        image: "/images/projects/ecommerc1.png",
+        link: "https://modern-ecommerce-eight.vercel.app/",
+        gradient: "from-indigo-500 to-violet-600",
+        features: FEATURES,
+      },
+      {
+        id: "modernstore2",
+        cat: "ecommerce",
+        name: "Modern E-commerce 2",
+        result: t("modernstore2.result"),
+        category: t("modernstore2.category"),
+        image: "/images/projects/ecommerc2.png",
+        link: "https://modern-e-commerce2.vercel.app/",
+        gradient: "from-fuchsia-500 to-pink-600",
         features: FEATURES,
       },
       {

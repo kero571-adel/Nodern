@@ -62,7 +62,7 @@
 
   "feedback": {
     "title": "Client Feedback",
-    "subtitle": "We don't just say we're good... see what our clients say",
+    "subtitle": "But before that, look at our customers' opinions first.",
 
     "quote1": "The website completely changed how we get clients. We now reach people much faster.",
     "quote2": "After launching the site, our customer inquiries increased noticeably.",
@@ -316,7 +316,32 @@
         "feature3": "Smooth Ordering"
       }
     },
-
+    "modernstore1": {
+      "result": "↑ Modern shopping experience and higher engagement",
+      "category": "Small e-commerce store with a modern presentation",
+      "problemLabel": "Problem:",
+      "problem": "Small stores often look generic and fail to catch visitors' attention at first glance.",
+      "solutionLabel": "Solution:",
+      "solution": "We built a small store with a modern layout that highlights products and makes browsing and buying easy.",
+      "features": {
+        "feature1": "Modern layout",
+        "feature2": "Smooth browsing",
+        "feature3": "Fully responsive"
+      }
+    },
+    "modernstore2": {
+      "result": "↑ Stronger first impression and easier browsing",
+      "category": "Small e-commerce store with a distinct modern design",
+      "problemLabel": "Problem:",
+      "problem": "The client needed a small store with a fresh look that stands out from typical shops.",
+      "solutionLabel": "Solution:",
+      "solution": "We designed a modern presentation that puts products first and simplifies the path to purchase.",
+      "features": {
+        "feature1": "Modern product display",
+        "feature2": "Smooth experience",
+        "feature3": "Fully responsive"
+      }
+    },
     "coza": {
       "result": "↑ Higher purchase completion rate",
       "category": "Professional e-commerce store",

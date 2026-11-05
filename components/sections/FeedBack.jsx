@@ -2,94 +2,142 @@
 
 import { useState, useEffect, useCallback, useRef } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+
+const BASE_PATH = "/feedback";
+const MAX_ITEMS = 50; // سقف أمان للبحث عن الملفات
+const GAP = 16; // المسافة بين العناصر بالبكسل
+const SLIDE_RATIO = 0.78; // عرض العنصر من عرض الكاروسيل
+
+const EXTS = [
+  ["webp", "image"],
+  ["mp4", "video"],
+  ["mov", "video"],
+];
+const PREFIX = { image: "image/", video: "video/" };
+
+// عناصر وهمية بتظهر لحد ما أول ملف يتلاقى
+const PLACEHOLDERS = [{ placeholder: true }, { placeholder: true }, { placeholder: true }];
+
+// بيجرب الامتدادات الثلاثة لنفس الرقم في نفس الوقت (طلب واحد بدل تلاتة ورا بعض)
+async function probe(n) {
+  const results = await Promise.all(
+    EXTS.map(async ([ext, type]) => {
+      const src = `${BASE_PATH}/${n}.${ext}`;
+      try {
+        const res = await fetch(src, { method: "HEAD" });
+        const ct = res.headers.get("content-type") || "";
+        return res.ok && ct.startsWith(PREFIX[type]) ? { type, src } : null;
+      } catch {
+        return null;
+      }
+    })
+  );
+  return results.find(Boolean) || null;
+}
+
+function Spinner() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center bg-white/5 animate-pulse">
+      <div
+        className="h-10 w-10 rounded-full border-2 border-white/20 border-t-blue-500 animate-spin"
+        aria-hidden="true"
+      />
+    </div>
+  );
+}
 
 export default function FeedBack() {
   const locale = useLocale();
   const t = useTranslations("feedback");
-  const carouselRef = useRef(null);
-  const isPaused = useRef(false);
 
-  const quotes = [
-    {
-      text: t("quote1"),
-      name: locale === "ar" ? "عميل في مجال المطاعم" : "Restaurant Client",
-      video: null,
-    },
-    {
-      text: t("quote2"),
-      name: locale === "ar" ? "صاحب مشروع ناشئ" : "Startup Owner",
-      video: null,
-    },
-    {
-      text: t("quote3"),
-      name: locale === "ar" ? "رائد أعمال" : "Entrepreneur",
-      video: null,
-    },
-    {
-      text: t("quote4"),
-      name: locale === "ar" ? "صاحب علامة تجارية" : "Brand Owner",
-      video: null,
-    },
-    {
-      text: t("quote5"),
-      name: locale === "ar" ? "عميل متجر إلكتروني" : "E-commerce Client",
-      video: null,
-    },
-    {
-      text: t("quote6"),
-      name: locale === "ar" ? "صاحب شركة خدمات" : "Service Business Owner",
-      video: null,
-    },
-  ];
-
+  const [items, setItems] = useState([]);
+  const [discovering, setDiscovering] = useState(true);
+  const [loaded, setLoaded] = useState({});
   const [index, setIndex] = useState(0);
+  const [width, setWidth] = useState(0);
 
-  const prev = useCallback(() => {
-    setIndex((i) => (i === 0 ? quotes.length - 1 : i - 1));
-  }, [quotes.length]);
+  const viewportRef = useRef(null);
+  const videoRefs = useRef([]);
+  const isPaused = useRef(false);
+  const isVideoPlaying = useRef(false);
+  const touchStartX = useRef(0);
 
-  const next = useCallback(() => {
-    setIndex((i) => (i === quotes.length - 1 ? 0 : i + 1));
-  }, [quotes.length]);
+  const total = items.length;
 
-  const goToSlide = useCallback((i) => {
-    setIndex(i);
-    isPaused.current = false;
+  const markLoaded = useCallback((src) => {
+    setLoaded((p) => (p[src] ? p : { ...p, [src]: true }));
   }, []);
 
-  // Auto-rotate with pause on hover/focus
+  // اكتشاف الملفات بالترتيب: كل عنصر بيظهر أول ما يتلاقى من غير ما يستنى الباقي
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (!isPaused.current) {
-        next();
+    let cancelled = false;
+    (async () => {
+      for (let n = 1; n <= MAX_ITEMS; n++) {
+        const item = await probe(n);
+        if (cancelled) return;
+        if (!item) break;
+        setItems((prev) => [...prev, item]);
       }
+      if (!cancelled) setDiscovering(false);
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // قياس عرض الكاروسيل
+  useEffect(() => {
+    const el = viewportRef.current;
+    if (!el) return;
+    const update = () => setWidth(el.offsetWidth);
+    update();
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  const prev = useCallback(() => {
+    setIndex((i) => (i === 0 ? total - 1 : i - 1));
+  }, [total]);
+
+  const next = useCallback(() => {
+    setIndex((i) => (i === total - 1 ? 0 : i + 1));
+  }, [total]);
+
+  const goToSlide = useCallback((i) => setIndex(i), []);
+
+  // إيقاف أي فيديو مش هو الحالي
+  useEffect(() => {
+    videoRefs.current.forEach((v, i) => {
+      if (v && i !== index) v.pause();
+    });
+    isVideoPlaying.current = false;
+  }, [index]);
+
+  // تدوير تلقائي (بيقف مع الهوفر أو أثناء تشغيل فيديو أو لحد ما الاكتشاف يخلص)
+  useEffect(() => {
+    if (total < 2 || discovering) return;
+    const interval = setInterval(() => {
+      if (!isPaused.current && !isVideoPlaying.current) next();
     }, 5000);
     return () => clearInterval(interval);
-  }, [next]);
+  }, [next, total, discovering]);
 
-  // Pause rotation on hover/focus for accessibility
   const handleMouseEnter = useCallback(() => {
     isPaused.current = true;
   }, []);
-
   const handleMouseLeave = useCallback(() => {
     isPaused.current = false;
   }, []);
 
-  // Keyboard navigation support
   const handleKeyDown = useCallback(
     (e) => {
-      if (
-        e.key === "ArrowLeft" ||
-        (locale === "ar" && e.key === "ArrowRight")
-      ) {
+      if (total === 0) return;
+      if (e.key === "ArrowLeft") {
         e.preventDefault();
         prev();
-      } else if (
-        e.key === "ArrowRight" ||
-        (locale === "ar" && e.key === "ArrowLeft")
-      ) {
+      } else if (e.key === "ArrowRight") {
         e.preventDefault();
         next();
       } else if (e.key === "Home") {
@@ -97,56 +145,35 @@ export default function FeedBack() {
         goToSlide(0);
       } else if (e.key === "End") {
         e.preventDefault();
-        goToSlide(quotes.length - 1);
+        goToSlide(total - 1);
       }
     },
-    [prev, next, goToSlide, locale, quotes.length]
+    [prev, next, goToSlide, total]
   );
-
-  // Touch swipe support for mobile
-  const touchStartX = useRef(0);
-  const touchEndX = useRef(0);
 
   const handleTouchStart = useCallback((e) => {
     touchStartX.current = e.touches[0].clientX;
   }, []);
 
-  const handleTouchEnd = useCallback((e) => {
-    touchEndX.current = e.changedTouches[0].clientX;
-    handleSwipe();
-  }, []);
-
-  const handleSwipe = useCallback(() => {
-    const swipeThreshold = 50;
-    const diff = touchStartX.current - touchEndX.current;
-
-    if (Math.abs(diff) > swipeThreshold) {
-      if (diff > 0) {
-        // Swiped left → next
-        next();
-      } else {
-        // Swiped right → prev
-        prev();
+  const handleTouchEnd = useCallback(
+    (e) => {
+      if (total === 0) return;
+      const diff = touchStartX.current - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) next();
+        else prev();
       }
-    }
-  }, [next, prev]);
+    },
+    [next, prev, total]
+  );
 
-  // Animation variants
-  const slideVariants = {
-    hidden: { opacity: 0, scale: 0.95, y: 20 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-    exit: {
-      opacity: 0,
-      scale: 1.05,
-      y: -20,
-      transition: { duration: 0.4, ease: "easeIn" },
-    },
-  };
+  // العنصر الحالي في النص وجزء من اللي قبله واللي بعده باينين (كل العناصر 9:16)
+  const slideWidth = Math.min(width * SLIDE_RATIO, 320);
+  const x = (width - slideWidth) / 2 - index * (slideWidth + GAP);
+
+  const blockContext = (e) => e.preventDefault();
+
+  const slides = total > 0 ? items : discovering ? PLACEHOLDERS : [];
 
   return (
     <section
@@ -156,12 +183,10 @@ export default function FeedBack() {
         paddingBottom: "calc(5rem + env(safe-area-inset-bottom))",
       }}
     >
-      {/* Background decoration - unchanged */}
       <div className="absolute w-[400px] sm:w-[600px] md:w-[800px] h-[400px] sm:h-[600px] md:h-[800px] bg-blue-600/10 blur-[120px] sm:blur-[140px] md:blur-[160px] rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
 
       <div
-        ref={carouselRef}
-        className="relative z-10 text-center max-w-4xl px-4 sm:px-6 mx-auto"
+        className="relative z-10 text-center w-full max-w-5xl mx-auto"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onFocus={handleMouseEnter}
@@ -171,6 +196,7 @@ export default function FeedBack() {
         role="region"
         aria-label={t("title")}
         aria-roledescription="carousel"
+        aria-busy={discovering && total === 0}
       >
         <motion.span
           initial={{ opacity: 0 }}
@@ -185,107 +211,179 @@ export default function FeedBack() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-2xl sm:text-3xl md:text-5xl font-bold mb-12 sm:mb-16 text-gray-400"
+          className="text-2xl sm:text-3xl md:text-5xl font-bold mb-10 sm:mb-14 text-gray-400"
         >
           {t("subtitle")}
         </motion.h2>
 
+        {/* الكاروسيل دايماً LTR عشان حساب الحركة يبقى ثابت حتى في العربي */}
         <div
-          className="relative min-h-[250px] sm:min-h-[300px] flex items-center justify-center"
+          dir="ltr"
+          ref={viewportRef}
+          className="relative w-full overflow-hidden"
           onTouchStart={handleTouchStart}
           onTouchEnd={handleTouchEnd}
         >
-          <AnimatePresence mode="wait">
+          {slides.length > 0 && width > 0 && (
             <motion.div
-              key={index}
-              custom={index}
-              variants={slideVariants}
-              id={`slide-${index}`}
-              initial="hidden"
-              animate="visible"
-              role="tabpanel"
-              exit="exit"
-              className="absolute inset-0 flex flex-col items-center justify-center px-4"
+              className="flex"
+              style={{ gap: GAP }}
+              initial={false}
+              animate={{ x }}
+              transition={{ type: "spring", stiffness: 220, damping: 30 }}
             >
-              <span
-                className="text-6xl sm:text-7xl md:text-8xl text-blue-600/20 absolute -top-8 sm:-top-10 font-serif select-none"
-                aria-hidden="true"
-              >
-                "
-              </span>
-              <blockquote className="text-xl sm:text-2xl md:text-4xl leading-relaxed font-medium mb-6 sm:mb-8">
-                {quotes[index].text}
-              </blockquote>
-              <div
-                className="w-12 h-1 bg-blue-600 mb-4 sm:mb-6 rounded-full"
-                aria-hidden="true"
-              />
-              <cite className="text-lg sm:text-xl font-bold text-gray-300 not-italic">
-                {quotes[index].name}
-              </cite>
+              {slides.map((item, i) => {
+                const isActive = i === index;
+                const baseClass = `relative shrink-0 aspect-[9/16] rounded-2xl overflow-hidden bg-black/40 border border-white/10 transition-all duration-500 ${
+                  isActive
+                    ? "opacity-100 scale-100"
+                    : "opacity-40 scale-[0.94] cursor-pointer hover:opacity-60"
+                }`;
+
+                // عنصر تحميل وهمي لحد ما الملفات تتلاقى
+                if (item.placeholder) {
+                  return (
+                    <div
+                      key={`ph-${i}`}
+                      className={baseClass}
+                      style={{ width: slideWidth }}
+                      aria-hidden="true"
+                    >
+                      <Spinner />
+                    </div>
+                  );
+                }
+
+                const isLoaded = !!loaded[item.src];
+
+                return (
+                  <div
+                    key={item.src}
+                    id={`slide-${i}`}
+                    role="group"
+                    aria-roledescription="slide"
+                    aria-label={`${i + 1} / ${total}`}
+                    onClick={() => !isActive && goToSlide(i)}
+                    className={baseClass}
+                    style={{ width: slideWidth }}
+                  >
+                    {!isLoaded && <Spinner />}
+
+                    {item.type === "image" ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        ref={(el) => {
+                          if (el && el.complete && el.naturalWidth) markLoaded(item.src);
+                        }}
+                        src={item.src}
+                        alt={`${t("title")} ${i + 1}`}
+                        className={`w-full h-full object-cover select-none transition-opacity duration-500 ${
+                          isLoaded ? "opacity-100" : "opacity-0"
+                        }`}
+                        draggable={false}
+                        loading={i <= 1 ? "eager" : "lazy"}
+                        fetchPriority={i === 0 ? "high" : "auto"}
+                        onLoad={() => markLoaded(item.src)}
+                        onError={() => markLoaded(item.src)}
+                        onContextMenu={blockContext}
+                      />
+                    ) : (
+                      <video
+                        ref={(el) => {
+                          videoRefs.current[i] = el;
+                          if (el && el.readyState >= 2) markLoaded(item.src);
+                        }}
+                        src={`${item.src}#t=0.1`}
+                        className={`w-full h-full object-cover transition-opacity duration-500 ${
+                          isLoaded ? "opacity-100" : "opacity-0"
+                        }`}
+                        controls={isActive}
+                        controlsList="nodownload noplaybackrate"
+                        disablePictureInPicture
+                        disableRemotePlayback
+                        playsInline
+                        preload={i <= 1 ? "auto" : "metadata"}
+                        onLoadedData={() => markLoaded(item.src)}
+                        onError={() => markLoaded(item.src)}
+                        onContextMenu={blockContext}
+                        onPlay={() => {
+                          isVideoPlaying.current = true;
+                        }}
+                        onPause={() => {
+                          isVideoPlaying.current = false;
+                        }}
+                        onEnded={() => {
+                          isVideoPlaying.current = false;
+                        }}
+                      />
+                    )}
+                  </div>
+                );
+              })}
             </motion.div>
-          </AnimatePresence>
+          )}
         </div>
 
         {/* Controls */}
-        <div className="flex items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12">
-          <button
-            onClick={prev}
-            className="p-3 sm:p-4 rounded-full border border-white/10 hover:bg-white/5 transition-all active:scale-90 min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-            aria-label={locale === "ar" ? "اقتباس سابق" : "Previous quote"}
-            aria-controls="testimonial-carousel"
-          >
-            <span className="text-xl sm:text-2xl" aria-hidden="true">
-              ←
-            </span>
-          </button>
+        {total > 0 && (
+          <div className="flex items-center justify-center gap-4 sm:gap-8 mt-8 sm:mt-12">
+            <button
+              onClick={prev}
+              className="p-3 sm:p-4 rounded-full border border-white/10 hover:bg-white/5 transition-all active:scale-90 min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              aria-label={locale === "ar" ? "السابق" : "Previous"}
+              aria-controls="testimonial-carousel"
+            >
+              <span className="text-xl sm:text-2xl" aria-hidden="true">
+                ←
+              </span>
+            </button>
 
-          <div
-            id="testimonial-carousel"
-            className="flex gap-2 sm:gap-3"
-            role="tablist"
-            aria-label={t("slideIndicator")}
-          >
-            {quotes.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => goToSlide(i)}
-                role="tab"
-                aria-selected={i === index}
-                aria-controls={`slide-${i}`}
-                id={`tab-${i}`}
-                className={`relative h-1.5 rounded-full transition-all duration-300 touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50
-                  before:absolute before:inset-[-12px] before:content-['']
-                  ${
-                    i === index
-                      ? "w-6 sm:w-8 bg-blue-600"
-                      : "w-1.5 sm:w-2 bg-white/20"
-                  }`}
-                aria-label={
-                  locale === "ar"
-                    ? `اذهب إلى الاقتباس ${i + 1}`
-                    : `Go to slide ${i + 1}`
-                }
-              />
-            ))}
+            <div
+              id="testimonial-carousel"
+              className="flex gap-2 sm:gap-3"
+              role="tablist"
+              aria-label={t("slideIndicator")}
+            >
+              {items.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => goToSlide(i)}
+                  role="tab"
+                  aria-selected={i === index}
+                  aria-controls={`slide-${i}`}
+                  id={`tab-${i}`}
+                  className={`relative h-1.5 rounded-full transition-all duration-300 touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50
+                    before:absolute before:inset-[-12px] before:content-['']
+                    ${
+                      i === index
+                        ? "w-6 sm:w-8 bg-blue-600"
+                        : "w-1.5 sm:w-2 bg-white/20"
+                    }`}
+                  aria-label={
+                    locale === "ar"
+                      ? `اذهب إلى العنصر ${i + 1}`
+                      : `Go to slide ${i + 1}`
+                  }
+                />
+              ))}
+            </div>
+
+            <button
+              onClick={next}
+              className="p-3 sm:p-4 rounded-full border border-white/10 hover:bg-white/5 transition-all active:scale-90 min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              aria-label={locale === "ar" ? "التالي" : "Next"}
+              aria-controls="testimonial-carousel"
+            >
+              <span className="text-xl sm:text-2xl" aria-hidden="true">
+                →
+              </span>
+            </button>
           </div>
-
-          <button
-            onClick={next}
-            className="p-3 sm:p-4 rounded-full border border-white/10 hover:bg-white/5 transition-all active:scale-90 min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-            aria-label={locale === "ar" ? "اقتباس التالي" : "Next quote"}
-            aria-controls="testimonial-carousel"
-          >
-            <span className="text-xl sm:text-2xl" aria-hidden="true">
-              →
-            </span>
-          </button>
-        </div>
+        )}
 
         {/* Live region for screen readers */}
         <div className="sr-only" aria-live="polite" aria-atomic="true">
-          {t("slide")} {index + 1} {t("of")} {quotes.length}:{" "}
-          {quotes[index].text}
+          {total > 0 && `${t("slide")} ${index + 1} ${t("of")} ${total}`}
         </div>
       </div>
     </section>

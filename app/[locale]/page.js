@@ -22,9 +22,9 @@ export default function Home() {
       <main id="main-content" className="relative text-white">
         <Hero />
         <Brands />
+        <FeedBack />
         <WhyChooseUs />
         <Projects />
-        <FeedBack />
         <Timeline />
         <Contact />
       </main>
