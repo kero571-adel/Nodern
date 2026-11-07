@@ -12,7 +12,7 @@ const SLIDE_RATIO = 0.78; // عرض العنصر من عرض الكاروسيل
 const EXTS = [
   ["webp", "image"],
   ["mp4", "video"],
-  ["mov", "video"],
+  ["MOV", "video"],
 ];
 const PREFIX = { image: "image/", video: "video/" };
 
