@@ -19,6 +19,7 @@ export default function Brands() {
 
   return (
     <section
+    id="brands"
       aria-labelledby="brands-heading"
       className="relative border-y border-gray-800 bg-black/30 py-8"
     >

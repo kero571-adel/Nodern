@@ -2,7 +2,7 @@
 
 export default function HeroScrollButton({ text }) {
   const handleScroll = () => {
-    const section = document.querySelector("#about");
+    const section = document.querySelector("#brands");
 
     if (section) {
       const headerOffset = 80;
