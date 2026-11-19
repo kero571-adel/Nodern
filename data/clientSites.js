@@ -10,7 +10,6 @@ export const CLIENT_SITE_DATA = [
   [117, "nada mohamed", "portfolio", "https://nada-mohamed-ghonem.vercel.app/", 1, true],
   [127, "alaa", "portfolio", "https://alaa-studio.vercel.app/", 1, true],
   [108, "Abu Almaati", "media", "https://abu-almaati.vercel.app/", 1],
-  [119, "ziad mahmoud", "media", "https://ziad-mahmoud.vercel.app/", 2],
   [109, "HK Media", "media", "https://hkmedia.vercel.app/", 2],
   [115, "Media Sharks", "media", "https://media-shark.vercel.app/ar", 1, true],
   [110, "Merna UGC", "ugc", "https://merna-ugc.vercel.app/", 3],
