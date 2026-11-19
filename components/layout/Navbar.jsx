@@ -72,7 +72,7 @@ export default function Navbar() {
     }
   }, [isMobileOpen]);
 
-  // تأثير الـ Scroll للـ Navbar (مُحسّن بأداء أفضل)
+  // تأثير الـ Scroll للـ Navbar
   useEffect(() => {
     let ticking = false;
     const handleScroll = () => {
@@ -143,7 +143,7 @@ export default function Navbar() {
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
-            {/* === Logo (يسار - ثابت) === */}
+            {/* === Logo === */}
             <Link
               href="/"
               onClick={(e) => {
@@ -171,8 +171,8 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* === Actions (يمين - ثابت) === */}
-            <div className="flex items-center gap-3 lg:gap-4">
+            {/* === Actions (Start Project + Language + Menu) === */}
+            <div className="flex items-center gap-2 sm:gap-3 lg:gap-4">
               <Link
                 href="#contact"
                 onClick={(e) => handleAnchorClick(e, "#contact")}
@@ -180,21 +180,21 @@ export default function Navbar() {
               >
                 {t("startProject")}
               </Link>
-              <div className="hidden md:inline-flex">
-                <LanguageSwitcher />
-              </div>
-            </div>
 
-            {/* === Mobile Menu Button === */}
-            <button
-              onClick={() => setIsMobileOpen(true)}
-              className="md:hidden p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation"
-              aria-label="Open menu"
-              aria-expanded={isMobileOpen}
-              aria-controls="mobile-menu"
-            >
-              <IoMdMenu size={24} />
-            </button>
+              {/* Language Switcher - ظاهر دايماً (موبايل + ديسكتوب) */}
+              <LanguageSwitcher />
+
+              {/* Mobile Menu Button - جنب زر اللغة */}
+              <button
+                onClick={() => setIsMobileOpen(true)}
+                className="md:hidden p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation"
+                aria-label="Open menu"
+                aria-expanded={isMobileOpen}
+                aria-controls="mobile-menu"
+              >
+                <IoMdMenu size={24} />
+              </button>
+            </div>
           </div>
         </div>
 
@@ -202,7 +202,7 @@ export default function Navbar() {
         <div
           id="mobile-menu"
           ref={mobileMenuRef}
-          className={`fixed top-0 right-0 h-[100dvh] w-4/5 sm:w-80 max-w-xs bg-black/95 backdrop-blur-xl border-l border-gray-800 z-50 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col`}
+          className="fixed top-0 right-0 h-[100dvh] w-4/5 sm:w-80 max-w-xs bg-black/95 backdrop-blur-xl border-l border-gray-800 z-50 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col"
           style={{
             transform: isMobileOpen ? "translateX(0)" : "translateX(100%)",
             paddingBottom: "env(safe-area-inset-bottom)",
@@ -256,11 +256,6 @@ export default function Navbar() {
             >
               {t("startProject")}
             </Link>
-
-            {/* Language Switcher - Mobile */}
-            <div className="mt-4 pt-4 border-t border-gray-800">
-              <LanguageSwitcher />
-            </div>
           </div>
         </div>
       </nav>
