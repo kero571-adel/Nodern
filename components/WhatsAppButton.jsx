@@ -1,229 +1,234 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { X } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
-// ✅ غير رقم الواتساب هنا
-const WHATSAPP_NUMBER = "201507174664"; 
-const WHATSAPP_MESSAGE = "مرحبا, عاوز اعمل موقع الكترونى للمشروع بتاعى "
+// ✅ غيّر رقم الواتساب هنا
+const WHATSAPP_NUMBER = "201507174664";
+
+// ترتيب الفقاعات (من فوق لتحت). id = id السكشن في الصفحة
+const ITEMS = [
+  { key: "work", id: "work" },
+  { key: "why", id: "whyChooseUs" },
+  { key: "contact", id: "contact" },
+  { key: "whatsapp", id: "whatsapp" },
+];
+const R = 98; // نصف قطر نص الدايرة
+const NAVY = "#0b1530";
 
 const WaIcon = ({ size = 28, color = "white" }) => (
-  <svg viewBox="0 0 24 24" fill={color} width={size} height={size}>
+  <svg viewBox="0 0 24 24" fill={color} width={size} height={size} aria-hidden="true">
     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
     <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.526 5.847L0 24l6.335-1.502A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.796 9.796 0 01-5.021-1.38l-.36-.214-3.732.885.935-3.63-.235-.372A9.788 9.788 0 012.182 12C2.182 6.565 6.565 2.182 12 2.182S21.818 6.565 21.818 12 17.435 21.818 12 21.818z" />
   </svg>
 );
 
+function Robot() {
+  return (
+    <svg viewBox="0 0 64 64" className="h-full w-full" aria-hidden="true">
+      <line x1="32" y1="9" x2="32" y2="15" stroke="#3b82f6" strokeWidth="2.5" strokeLinecap="round" />
+      <circle cx="32" cy="7" r="4" fill="#67e8f9" />
+      <rect x="9" y="15" width="46" height="36" rx="14" fill="#2563eb" />
+      <rect x="14" y="21" width="36" height="22" rx="9" fill="#0a1128" />
+      <g className="rg-eyes">
+        <ellipse cx="25" cy="32" rx="3.2" ry="4" fill="#67e8f9" />
+        <ellipse cx="39" cy="32" rx="3.2" ry="4" fill="#67e8f9" />
+      </g>
+      <path d="M27 38.5c2.6 2.4 7.4 2.4 10 0" stroke="#67e8f9" strokeWidth="2" strokeLinecap="round" fill="none" />
+      <circle cx="19" cy="38" r="2.4" fill="#1d4ed8" />
+      <circle cx="45" cy="38" r="2.4" fill="#1d4ed8" />
+      <rect x="3" y="28" width="6" height="12" rx="3" fill="#60a5fa" />
+      <rect x="55" y="28" width="6" height="12" rx="3" fill="#60a5fa" />
+    </svg>
+  );
+}
+
 export default function WhatsAppButton() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [showPulse, setShowPulse] = useState(true);
+  const t = useTranslations("robot");
+  const [show, setShow] = useState(false); // الروبوت ظاهر
+  const [hidden, setHidden] = useState(false); // الزائر قفله: بيتحوّل لزرار الواتساب
+  const [open, setOpen] = useState(false);
+  const [hello, setHello] = useState(true);
+
+  const openWhatsApp = () => {
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(t("whatsappMessage"))}`;
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowPulse(false), 5000);
+    const timer = setTimeout(() => setShow(true), 2500);
     return () => clearTimeout(timer);
   }, []);
 
+  // الرسالة بتختفي لوحدها عشان ما تغطيش المحتوى
   useEffect(() => {
-    if (!isOpen) return;
-    const handleClickOutside = (e) => {
-      if (!e.target.closest("[data-wa-widget]")) {
-        setIsOpen(false);
-      }
+    if (!show) return;
+    const timer = setTimeout(() => setHello(false), 9000);
+    return () => clearTimeout(timer);
+  }, [show]);
+
+  useEffect(() => {
+    if (!open) return;
+    const key = (e) => e.key === "Escape" && setOpen(false);
+    const outside = (e) => {
+      if (!e.target.closest("[data-robot]")) setOpen(false);
     };
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("touchstart", handleClickOutside);
+    window.addEventListener("keydown", key);
+    document.addEventListener("mousedown", outside);
+    document.addEventListener("touchstart", outside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("touchstart", handleClickOutside);
+      window.removeEventListener("keydown", key);
+      document.removeEventListener("mousedown", outside);
+      document.removeEventListener("touchstart", outside);
     };
-  }, [isOpen]);
+  }, [open]);
 
-  const handleOpen = () => {
-    setIsOpen((prev) => !prev);
-    setShowPulse(false);
+  const go = (id) => {
+    setOpen(false);
+    if (id === "whatsapp") return openWhatsApp();
+    const el = document.getElementById(id);
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.scrollTo({
+      top: el.getBoundingClientRect().top + window.scrollY - 72,
+      behavior: reduce ? "auto" : "smooth",
+    });
   };
 
-  const handleWhatsApp = () => {
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-    window.open(url, "_blank");
-  };
+  const css = (
+    <style>{`
+      .rg-root{animation:rg-in .6s cubic-bezier(.2,1.3,.4,1) both}
+      .rg-bot{animation:rg-float 3.2s ease-in-out infinite}
+      .rg-eyes{transform-origin:32px 32px;animation:rg-blink 4s infinite}
+      .rg-pulse{animation:rg-pulse 2s ease-out infinite}
+      .wa-pulse{animation:wa-pulse 2s ease-out infinite}
+      @keyframes rg-in{from{opacity:0;transform:translateX(80px)}to{opacity:1;transform:none}}
+      @keyframes rg-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+      @keyframes rg-blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+      @keyframes rg-pulse{0%{box-shadow:0 0 0 0 rgba(96,165,250,.55)}100%{box-shadow:0 0 0 16px rgba(96,165,250,0)}}
+      @keyframes wa-pulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.9);opacity:0}}
+      @media (prefers-reduced-motion:reduce){.rg-root,.rg-bot,.rg-eyes,.rg-pulse,.wa-pulse{animation:none}}
+    `}</style>
+  );
+
+  // بعد ما الزائر يقفل الروبوت: زرار الواتساب الأخضر في نفس مكانه القديم
+  if (hidden) {
+    return (
+      <>
+        {css}
+        <button
+          type="button"
+          onClick={openWhatsApp}
+          aria-label={t("whatsapp")}
+          className="fixed bottom-4 right-4 z-[9999] grid h-[60px] w-[60px] place-items-center rounded-full border-0 shadow-xl"
+          style={{
+            background: "linear-gradient(135deg,#25d366 0%,#128c7e 100%)",
+            boxShadow: "0 4px 20px rgba(37,211,102,0.5), 0 2px 8px rgba(0,0,0,0.2)",
+          }}
+        >
+          <span className="wa-pulse absolute inset-0 rounded-full" style={{ background: "rgba(37,211,102,0.4)" }} />
+          <WaIcon size={28} />
+        </button>
+      </>
+    );
+  }
+
+  if (!show) return null;
+
+  const step = 160 / (ITEMS.length - 1);
 
   return (
-    <>
-      {/* ===== POPUP — مستقل تماماً عن الزر ===== */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: 16, scale: 0.88 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.88 }}
-            transition={{ type: "spring", stiffness: 320, damping: 24 }}
-            data-wa-widget
-            style={{
-              position: "fixed",
-              bottom: "88px",   /* فوق الزر مباشرةً */
-              right: "16px",
-              width: "min(300px, calc(100vw - 32px))", /* لا يطلع برة الشاشة أبداً */
-              zIndex: 9999,
-              borderRadius: "16px",
-              overflow: "hidden",
-              boxShadow: "0 8px 40px rgba(0,0,0,0.22), 0 2px 12px rgba(0,0,0,0.1)",
-              direction: "rtl",
-              background: "#fff",
-            }}
+    <div data-robot className="rg-root fixed bottom-[46dvh] right-3 z-[9999] sm:bottom-32 print:hidden">
+      {css}
+      <div className="relative h-16 w-16">
+        {ITEMS.map(({ key, id }, i) => {
+          const a = ((10 + i * step) * Math.PI) / 180; // من فوق لتحت ناحية الشمال
+          const x = -Math.sin(a) * R;
+          const y = -Math.cos(a) * R;
+          const wa = id === "whatsapp";
+          const size = wa ? 58 : 52;
+          return (
+            <button
+              key={id}
+              type="button"
+              tabIndex={open ? 0 : -1}
+              aria-hidden={!open}
+              aria-label={t(`items.${key}`)}
+              onClick={() => go(id)}
+              style={{
+                width: size,
+                height: size,
+                marginLeft: -size / 2,
+                marginTop: -size / 2,
+                transform: open ? `translate(${x}px,${y}px) scale(1)` : "translate(0,0) scale(0)",
+                transitionDelay: open ? `${i * 45}ms` : "0ms",
+                ...(wa
+                  ? { background: "linear-gradient(135deg,#25d366 0%,#128c7e 100%)", color: "#fff", border: "none" }
+                  : { background: NAVY }),
+              }}
+              className={`absolute left-1/2 top-1/2 grid place-items-center rounded-full text-[10px] font-semibold shadow-lg transition duration-300 ease-out ${
+                wa ? "" : "border border-blue-400/40 text-blue-100 hover:bg-blue-600 hover:text-white"
+              } ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
+            >
+              {wa ? <WaIcon size={26} /> : t(`items.${key}`)}
+            </button>
+          );
+        })}
+
+        {hello && !open && (
+          <div
+            className="absolute bottom-full right-0 mb-3 w-48 rounded-2xl rounded-br-sm border border-blue-400/30 p-3 text-[13px] leading-snug text-white shadow-xl"
+            style={{ background: NAVY, paddingInlineEnd: 28 }}
           >
-            {/* Header */}
-            <div style={{
-              background: "linear-gradient(135deg,#25d366 0%,#128c7e 100%)",
-              padding: "14px 16px",
-              display: "flex",
-              alignItems: "center",
-              gap: "12px",
-            }}>
-              {/* Avatar */}
-              <div style={{
-                width: 44, height: 44, borderRadius: "50%",
-                background: "rgba(255,255,255,0.2)",
-                display: "flex", alignItems: "center", justifyContent: "center",
-                flexShrink: 0,
-              }}>
-                <svg viewBox="0 0 32 32" fill="none" width="36" height="36">
-                  <circle cx="16" cy="16" r="16" fill="#25D366" />
-                  <path d="M16 7C11.03 7 7 11.03 7 16c0 1.77.49 3.43 1.35 4.84L7 25l4.27-1.32A8.93 8.93 0 0016 25c4.97 0 9-4.03 9-9s-4.03-9-9-9z" fill="white" />
-                  <path d="M20.5 18.5c-.25-.12-1.47-.72-1.7-.8-.22-.08-.38-.12-.54.12-.16.25-.62.8-.76.97-.14.17-.28.19-.52.06-.25-.12-1.04-.38-1.99-1.22-.73-.65-1.23-1.46-1.37-1.7-.14-.25-.01-.38.11-.5.11-.11.25-.28.37-.42.12-.14.16-.25.25-.42.08-.16.04-.31-.02-.43-.06-.12-.54-1.3-.74-1.78-.2-.47-.4-.4-.54-.41-.14 0-.3-.01-.46-.01-.16 0-.43.06-.65.31-.22.25-.86.84-.86 2.05 0 1.21.88 2.37 1 2.54.12.16 1.73 2.64 4.19 3.6.59.2 1.04.32 1.4.41.59.15 1.12.13 1.54.08.47-.06 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.22-.16-.46-.28z" fill="#25D366" />
-                </svg>
-              </div>
-
-              {/* Text */}
-              <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: 3 }}>
-                <span style={{ color: "white", fontWeight: 700, fontSize: 15 }}>تواصل معنا</span>
-                <span style={{ display: "flex", alignItems: "center", gap: 5, color: "rgba(255,255,255,0.9)", fontSize: 12 }}>
-                  <span style={{
-                    width: 7, height: 7, borderRadius: "50%",
-                    background: "#a8ff78", boxShadow: "0 0 6px #a8ff78",
-                    animation: "wa-blink 2s infinite",
-                    display: "inline-block",
-                  }} />
-                  متاح الآن
-                </span>
-              </div>
-
-              {/* Close */}
-              <button
-                onClick={() => setIsOpen(false)}
-                aria-label="إغلاق"
-                style={{
-                  background: "rgba(255,255,255,0.2)", border: "none",
-                  borderRadius: "50%", width: 28, height: 28,
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                  cursor: "pointer", color: "white", flexShrink: 0,
-                }}
-              >
-                <X size={15} />
-              </button>
-            </div>
-
-            {/* Chat body */}
-            <div style={{
-              padding: 16,
-              background: "#ece5dd",
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8b9a8' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}>
-              <div style={{
-                background: "white",
-                borderRadius: "0 12px 12px 12px",
-                padding: "11px 14px",
-                maxWidth: "85%",
-                boxShadow: "0 1px 3px rgba(0,0,0,0.1)",
-                position: "relative",
-              }}>
-                {/* Triangle */}
-                <span style={{
-                  position: "absolute", top: 0, right: "100%",
-                  width: 0, height: 0,
-                  borderTop: "8px solid white",
-                  borderLeft: "8px solid transparent",
-                }} />
-                <p style={{ margin: 0, color: "#2c3e50", fontSize: 14, lineHeight: 1.5 }}>مرحباً 👋</p>
-                <p style={{ margin: "4px 0 0", color: "#555", fontSize: 14, lineHeight: 1.5 }}>
-                  كيف يمكننا مساعدتك؟ ابدأ المحادثة معنا على واتساب.
-                </p>
-              </div>
-            </div>
-
-            {/* Footer CTA */}
-            <div style={{ padding: "12px 16px", background: "#fff" }}>
-              <button
-                onClick={handleWhatsApp}
-                style={{
-                  width: "100%",
-                  background: "linear-gradient(135deg,#25d366 0%,#128c7e 100%)",
-                  color: "white", border: "none", borderRadius: 10,
-                  padding: "12px 20px", fontSize: 15, fontWeight: 600,
-                  cursor: "pointer", display: "flex", alignItems: "center",
-                  justifyContent: "center", gap: 8,
-                }}
-              >
-                <WaIcon size={18} />
-                ابدأ المحادثة
-              </button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* ===== FAB Button ===== */}
-      <motion.button
-        onClick={handleOpen}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.92 }}
-        aria-label="تواصل عبر واتساب"
-        data-wa-widget
-        style={{
-          position: "fixed",
-          bottom: 16,
-          right: 16,
-          zIndex: 9999,
-          width: 60, height: 60,
-          borderRadius: "50%",
-          background: "linear-gradient(135deg,#25d366 0%,#128c7e 100%)",
-          border: "none", cursor: "pointer",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          boxShadow: "0 4px 20px rgba(37,211,102,0.5), 0 2px 8px rgba(0,0,0,0.2)",
-        }}
-      >
-        {/* Pulse rings */}
-        {showPulse && (
-          <>
-            <span style={{
-              position: "absolute", inset: 0, borderRadius: "50%",
-              background: "rgba(37,211,102,0.4)",
-              animation: "wa-pulse 2s ease-out infinite",
-            }} />
-            <span style={{
-              position: "absolute", inset: 0, borderRadius: "50%",
-              background: "rgba(37,211,102,0.4)",
-              animation: "wa-pulse 2s ease-out 0.7s infinite",
-            }} />
-          </>
+            <button
+              type="button"
+              onClick={() => {
+                setOpen(true);
+                setHello(false);
+              }}
+              className="block w-full"
+              style={{ textAlign: "start" }}
+            >
+              {t("greeting")}
+              <span className="mt-1 block text-[11px] font-semibold text-cyan-300">{t("tap")}</span>
+            </button>
+            <button
+              type="button"
+              aria-label={t("dismiss")}
+              onClick={() => setHello(false)}
+              className="absolute top-1.5 grid h-5 w-5 place-items-center rounded-full text-blue-200/70 hover:text-white"
+              style={{ insetInlineEnd: 6 }}
+            >
+              ×
+            </button>
+          </div>
         )}
 
-        {/* Icon — واتساب دايماً، X جوه الـ header بس */}
-        <WaIcon size={28} color="white" />
-      </motion.button>
-
-      {/* Global keyframes */}
-      <style>{`
-        @keyframes wa-pulse {
-          0%   { transform: scale(1); opacity: 0.7; }
-          100% { transform: scale(1.9); opacity: 0; }
-        }
-        @keyframes wa-blink {
-          0%, 100% { opacity: 1; }
-          50%       { opacity: 0.4; }
-        }
-      `}</style>
-    </>
+        <button
+          type="button"
+          aria-label={open ? t("close") : t("open")}
+          aria-expanded={open}
+          onClick={() => {
+            setOpen((v) => !v);
+            setHello(false);
+          }}
+          className={`rg-bot ${hello && !open ? "rg-pulse" : ""} relative h-16 w-16 rounded-full p-1.5 shadow-xl ring-2 ring-blue-400/50 transition hover:ring-blue-300`}
+          style={{ background: NAVY }}
+        >
+          <Robot />
+        </button>
+        <button
+          type="button"
+          aria-label={t("hide")}
+          onClick={() => {
+            setHidden(true);
+            setOpen(false);
+          }}
+          className="absolute -right-1 -top-1 grid h-5 w-5 place-items-center rounded-full bg-blue-600 text-[11px] leading-none text-white"
+        >
+          ×
+        </button>
+      </div>
+    </div>
   );
 }
