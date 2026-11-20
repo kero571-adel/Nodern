@@ -8,7 +8,7 @@ const WHATSAPP_NUMBER = "201272442140";
 
 // ترتيب الفقاعات (من فوق لتحت). id = id السكشن في الصفحة
 const ITEMS = [
-  { key: "projects", id: "projects" },
+  { key: "work", id: "projects" },
   { key: "why", id: "about" },
   { key: "contact", id: "contact" },
   { key: "whatsapp", id: "whatsapp" },
