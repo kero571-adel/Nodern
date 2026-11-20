@@ -6,7 +6,22 @@
     "contact": "Contact",
     "startProject": "Start a project"
   },
-
+"robot": {
+  "greeting": "Welcome! What would you like to know about us first?",
+  "tap": "Tap here to choose ↓",
+  "open": "Open guide menu",
+  "close": "Close guide menu",
+  "hide": "Hide guide",
+  "dismiss": "Dismiss message",
+  "whatsapp": "Chat on WhatsApp",
+  "whatsappMessage": "Hello, I'd like to build a website for my business.",
+  "items": {
+    "work": "Work",
+    "why": "Why us",
+    "contact": "Contact",
+    "whatsapp": "WhatsApp"
+  }
+},
   "hero": {
     "title": "Hello",
     "description": "We are a digital agency that specializes in creating beautiful and functional websites.",
