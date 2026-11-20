@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 // ✅ غيّر رقم الواتساب هنا
-const WHATSAPP_NUMBER = "201507174664";
+const WHATSAPP_NUMBER = "201272442140";
 
 // ترتيب الفقاعات (من فوق لتحت). id = id السكشن في الصفحة
 const ITEMS = [
-  { key: "work", id: "work" },
+  { key: "projects", id: "projects" },
   { key: "why", id: "whyChooseUs" },
   { key: "contact", id: "contact" },
   { key: "whatsapp", id: "whatsapp" },
